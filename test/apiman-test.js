@@ -73,10 +73,14 @@ test('Apiman should export the data.', (t) => {
 });
 
 test('Apiman should import the data.', (t) => {
-  let options = {};
-  apiman(options).importData('test/fixtures/api-manager-export.json');/*.then((a) => {*/
-   // console.log(a);
-    t.equal(1, 1);
-    t.end();
-  //});
+
+  apiman({})
+    .importData(__dirname + '/fixtures/api-manager-export.json')
+    .then((x) => {
+      console.log(x);
+      t.equals(x.indexOf('Data import completed successfully!') > 0, true);
+      t.end();
+    })
+    .catch((error) => console.log(error));
+
 });

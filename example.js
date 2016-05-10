@@ -33,5 +33,7 @@ apiman(opts).testGateway()
 .catch((e) => console.log(e));
 
 apiman({})
-.importData('test/fixtures/api-manager-export.json');
+.importData(__dirname + '/test/fixtures/api-manager-export.json')
+.then((x) => console.log(x))
+.catch((error) => console.log(error));
   
