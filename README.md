@@ -1,5 +1,7 @@
 # apiman-admin-client
 
+[![Build Status](https://travis-ci.org/bucharest-gold/apiman-admin-client.svg?branch=master)](https://travis-ci.org/bucharest-gold/apiman-admin-client)
+
 Node.js client for the Apiman admin API.
 
 This package provides a Node.js client for the [Apiman REST services][1].
@@ -42,7 +44,7 @@ image.
 
 Then just run the tests.
 
-    npm run test
+    make test
 
 To stop the server, run `./build/stop-server.sh`.
 
