@@ -2,38 +2,40 @@
 
 const apiman = require('./lib/apiman');
 
+// #1 Using custom username and password:
 const options = {
   baseUrl: 'http://localhost:8080',
   username: 'admin',
   password: 'admin123!'
 };
 
-apiman(options).status()
-  .then((a) => console.log(a.name));
+apiman(options).status().then((a) => console.log(a.name));
 
-const defaultAdminUserOptions = { baseUrl: 'http://localhost:8080' };
+// #2 Using default username and password:
+const defaultOptions = { baseUrl: 'http://localhost:8080' };
 
-apiman(defaultAdminUserOptions).listGateways()
-  .then((a) => console.log(a));
+apiman(defaultOptions).listGateways().then((a) => console.log(a));
 
-let config = JSON.stringify({endpoint : 'http://localhost:8080/apiman-gateway-api', 
-username: 'apimanager', password : 'apiman123!'});
+// #3 Testing a gateway:
+let config = JSON.stringify({
+  endpoint: 'http://localhost:8080/apiman-gateway-api',
+  username: 'apimanager',
+  password: 'apiman123!'
+});
 
 const opts = {
   body: {
     name: 'The Gateway',
     description: 'This is the gateway.',
     type: 'REST',
-    configuration : config
+    configuration: config
   }
 };
 
-apiman(opts).testGateway()
-.then((a) => console.log(a))
-.catch((e) => console.log(e));
+apiman(opts).testGateway().then((a) => console.log(a)).catch((e) => console.log(e));
 
+// #4 Importing settings and using defaultOptions:
 apiman({})
-.importData(__dirname + '/test/fixtures/api-manager-export.json')
-.then((x) => console.log(x))
-.catch((error) => console.log(error));
-  
+  .importData(__dirname + '/test/fixtures/api-manager-export.json')
+  .then((x) => console.log(x))
+  .catch((error) => console.log(error));
