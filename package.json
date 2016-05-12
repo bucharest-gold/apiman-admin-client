@@ -20,12 +20,12 @@
   "devDependencies": {
     "ink-docstrap": "^1.1.4",
     "istanbul": "^0.4.3",
+    "jsdoc": "^3.4.0",
     "jshint": "^2.9.2",
     "nsp": "^2.3.3",
     "tape": "^4.5.1"
   },
   "dependencies": {
-    "jsdoc": "^3.4.0",
     "request": "^2.72.0"
   }
 }
