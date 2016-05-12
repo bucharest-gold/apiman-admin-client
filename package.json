@@ -6,7 +6,9 @@
   "scripts": {
     "test": "tape test/*-test.js",
     "lint": "jshint index.js lib/*.js test/*.js",
-    "coverage": "istanbul cover tape -- test/**.js"
+    "coverage": "./node_modules/.bin/istanbul cover tape -- test/**.js",
+    "prepublish": "./node_modules/nsp/bin/nsp check",
+    "docs": "./node_modules/.bin/jsdoc -d docs -t ./node_modules/ink-docstrap/template -R README.md lib/apiman.js"
   },
   "keywords": [
     "Apiman",
@@ -16,11 +18,14 @@
   "author": "Red Hat, Inc.",
   "license": "Apache-2.0",
   "devDependencies": {
+    "ink-docstrap": "^1.1.4",
     "istanbul": "^0.4.3",
     "jshint": "^2.9.2",
+    "nsp": "^2.3.3",
     "tape": "^4.5.1"
   },
   "dependencies": {
+    "jsdoc": "^3.4.0",
     "request": "^2.72.0"
   }
 }
