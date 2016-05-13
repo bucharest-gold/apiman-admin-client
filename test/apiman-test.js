@@ -118,7 +118,7 @@ test('Apiman should list permissions.', (t) => {
 
 test('Apiman should list plugins.', (t) => {
 
-  // Better to create a plugin then test if lists... 
+  // https://github.com/bucharest-gold/apiman-admin-client/issues/4 
   apiman({}).listPlugins().then((data) => {
     t.equal(1, 1);
     t.end();
@@ -131,6 +131,70 @@ test('Apiman should list roles.', (t) => {
   apiman({}).listRoles().then((data) => {
     let roleFound = data.find((x) => x.id === 'APIDeveloper');
     t.equal(roleFound.id, 'APIDeveloper');
+    t.end();
+  });
+
+});
+
+test('Apiman should list policy definitions.', (t) => {
+
+  apiman({}).listPolicyDefs().then((data) => {
+    let policyFound = data.find((x) => x.id === 'AuthorizationPolicy');
+    t.equal(policyFound.id, 'AuthorizationPolicy');
+    t.end();
+  });
+
+});
+
+test('Apiman should list current user API organizations.', (t) => {
+
+  // https://github.com/bucharest-gold/apiman-admin-client/issues/5
+  apiman({}).listCurrentUserAPIOrganizations().then((data) => {
+    console.log(data);
+    t.end();
+  });
+
+});
+
+test('Apiman should list current user APIs.', (t) => {
+  apiman({}).listCurrentUserAPIs().then((data) => {
+    console.log(data);
+    t.end();
+  });
+
+});
+
+test('Apiman should list current user client organizations.', (t) => {
+
+  apiman({}).listCurrentUserClientOrganizations().then((data) => {
+    console.log(data);
+    t.end();
+  });
+
+});
+
+test('Apiman should list current user clients.', (t) => {
+
+  apiman({}).listCurrentUserClients().then((data) => {
+    console.log(data);
+    t.end();
+  });
+
+});
+
+test('Apiman should get informations about current user.', (t) => {
+
+  apiman({}).currentUserInfo().then((data) => {
+    t.equal(data.username, 'admin');
+    t.end();
+  });
+
+});
+
+test('Apiman should list current user organizations able to edit plans.', (t) => {
+
+  apiman({}).listCurrentUserPlanOrganizations().then((data) => {
+    console.log(data);
     t.end();
   });
 
