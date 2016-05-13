@@ -64,6 +64,30 @@ test('Apiman should test the gateway.', (t) => {
 
 });
 
+test('Apiman should create a gateway.', (t) => {
+
+  let config = JSON.stringify({
+    endpoint: 'http://localhost:8080/apiman-gateway-api-new',
+    username: 'foo', password: 'bar'
+  });
+
+  let options = {
+    body: {
+      name: 'The New Gateway3',
+      description: 'This is the new gateway.',
+      type: 'REST',
+      configuration: config
+    }
+  };
+  
+  apiman(options).createGateway()
+    .then((a) => {
+      t.equals(a.name, options.body.name);
+      t.end();
+    }).catch((e) => console.log(e));
+
+});
+
 test('Apiman should export the data.', (t) => {
   let options = {};
   apiman(options).exportData().then((a) => {

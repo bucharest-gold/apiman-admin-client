@@ -3,4 +3,3 @@ coverage
 docs
 *.log
 .vscode
-jsconfig.json
