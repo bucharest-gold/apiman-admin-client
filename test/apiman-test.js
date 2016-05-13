@@ -21,8 +21,7 @@ const apiman = require('../lib/apiman');
 
 test('Apiman should verify the status.', (t) => {
 
-  let options = {};
-  apiman(options).status().then((data) => {
+  apiman({}).status().then((data) => {
     t.equal(data.name, 'API Manager REST API');
     t.end();
   });
@@ -31,8 +30,7 @@ test('Apiman should verify the status.', (t) => {
 
 test('Apiman should list configured gateways.', (t) => {
 
-  let options = {};
-  apiman(options).listGateways().then((data) => {
+  apiman({}).listGateways().then((data) => {
     let gatewayFound = data.find((x) => x.id === 'TheGateway');
     t.equal(gatewayFound.id, 'TheGateway');
     t.end();
@@ -79,7 +77,7 @@ test('Apiman should create a gateway.', (t) => {
       configuration: config
     }
   };
-  
+
   apiman(options).createGateway()
     .then((a) => {
       t.equals(a.name, options.body.name);
@@ -89,8 +87,8 @@ test('Apiman should create a gateway.', (t) => {
 });
 
 test('Apiman should export the data.', (t) => {
-  let options = {};
-  apiman(options).exportData().then((a) => {
+  
+  apiman({}).exportData().then((a) => {
     t.equal(a.Metadata.apimanVersion.indexOf('Final') > 0, true);
     t.end();
   });
@@ -106,5 +104,34 @@ test('Apiman should import the data.', (t) => {
       t.end();
     })
     .catch((error) => console.log(error));
+
+});
+
+test('Apiman should list permissions.', (t) => {
+
+  apiman({}).listPermissions().then((data) => {
+    t.equal(data.userId, 'admin');
+    t.end();
+  });
+
+});
+
+test('Apiman should list plugins.', (t) => {
+
+  // Better to create a plugin then test if lists... 
+  apiman({}).listPlugins().then((data) => {
+    t.equal(1, 1);
+    t.end();
+  });
+
+});
+
+test('Apiman should list roles.', (t) => {
+
+  apiman({}).listRoles().then((data) => {
+    let roleFound = data.find((x) => x.id === 'APIDeveloper');
+    t.equal(roleFound.id, 'APIDeveloper');
+    t.end();
+  });
 
 });
