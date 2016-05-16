@@ -38,30 +38,6 @@ test('Apiman should list configured gateways.', (t) => {
 
 });
 
-test('Apiman should test the gateway.', (t) => {
-
-  let config = JSON.stringify({
-    endpoint: 'http://localhost:8080/apiman-gateway-api',
-    username: 'apimanager', password: 'apiman123!'
-  });
-
-  let options = {
-    body: {
-      name: 'The Gateway',
-      description: 'This is the gateway.',
-      type: 'REST',
-      configuration: config
-    }
-  };
-
-  apiman(options).testGateway()
-    .then((a) => {
-      t.equals(a.success, true);
-      t.end();
-    });
-
-});
-
 test('Apiman should create a gateway.', (t) => {
 
   let config = JSON.stringify({
