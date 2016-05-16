@@ -19,6 +19,19 @@
 const test = require('tape');
 const apiman = require('../lib/apiman');
 
+test('setup', (t) => {
+  
+  apiman({})
+    .importData(__dirname + '/fixtures/api-manager-export.json')
+    .then((x) => {
+      console.log(x);
+      t.equals(x.indexOf('Data import completed successfully!') > 0, true);
+      t.end();
+    })
+    .catch((error) => console.log(error));
+  
+});
+
 test('Apiman should verify the status.', (t) => {
 
   apiman({}).status().then((data) => {
@@ -70,19 +83,6 @@ test('Apiman should export the data.', (t) => {
   });
 });
 
-test('Apiman should import the data.', (t) => {
-
-  apiman({})
-    .importData(__dirname + '/fixtures/api-manager-export.json')
-    .then((x) => {
-      console.log(x);
-      t.equals(x.indexOf('Data import completed successfully!') > 0, true);
-      t.end();
-    })
-    .catch((error) => console.log(error));
-
-});
-
 test('Apiman should list permissions.', (t) => {
 
   apiman({}).listPermissions().then((data) => {
@@ -94,9 +94,9 @@ test('Apiman should list permissions.', (t) => {
 
 test('Apiman should list plugins.', (t) => {
 
-  // https://github.com/bucharest-gold/apiman-admin-client/issues/4 
   apiman({}).listPlugins().then((data) => {
-    t.equal(1, 1);
+    let pluginFound = data.find((x) => x.name === 'Transformation Policy Plugin');
+    t.equal(pluginFound.name, 'Transformation Policy Plugin');
     t.end();
   });
 
@@ -174,4 +174,9 @@ test('Apiman should list current user organizations able to edit plans.', (t) =>
     t.end();
   });
 
+});
+
+test('teardown', (t) => {
+  console.log('bbbbbbbbbbbbbbbbbbbbbbbbbbb');
+  t.end();
 });
