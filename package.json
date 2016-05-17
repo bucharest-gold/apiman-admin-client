@@ -7,7 +7,6 @@
     "test": "tape test/*-test.js",
     "lint": "jshint index.js lib/*.js test/*.js",
     "coverage": "./node_modules/.bin/istanbul cover tape -- test/**.js",
-    "prepublish": "./node_modules/nsp/bin/nsp check",
     "docs": "./node_modules/.bin/jsdoc -d docs -t ./node_modules/ink-docstrap/template -R README.md lib/apiman.js"
   },
   "keywords": [
@@ -22,7 +21,6 @@
     "istanbul": "^0.4.3",
     "jsdoc": "^3.4.0",
     "jshint": "^2.9.2",
-    "nsp": "^2.3.3",
     "tape": "^4.5.1"
   },
   "dependencies": {

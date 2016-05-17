@@ -26,8 +26,7 @@ test('setup', (t) => {
     .then(x => {
       t.equals(x.indexOf('Data import completed successfully!') > 0, true);
       t.end();
-    })
-    .catch(e => console.log(e));
+    }).catch(e => console.log(e));
 
 });
 
@@ -194,6 +193,14 @@ test('Apiman should list current user organizations able to edit plans.', (t) =>
 });
 
 test('teardown', t => {
-  console.log('done.');
-  t.end();
+
+  apiman({}).removeGateway('TheNewGateway3')
+    .then(x => {
+      console.log('--');
+      console.log(x);
+      console.log('--');
+      t.equal(1, 1);
+      t.end();
+    }).catch(e => console.log(e));
+  
 });
