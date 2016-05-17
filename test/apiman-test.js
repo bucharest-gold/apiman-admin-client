@@ -193,20 +193,27 @@ test('Apiman should list current user organizations able to edit plans.', (t) =>
 });
 
 test('teardown', t => {
- 
+
   console.log('Remove gateway...');
   apiman({}).removeGateway('TheNewGateway3')
     .then(x => {
       t.equal(x, 204);
       console.log('Gateway removed.');
     }).catch(e => console.log(e));
-    
+
   console.log('Remove plugin...');
   apiman({}).removePlugin(1)
     .then(x => {
       t.equal(x, 204);
-      t.end();
       console.log('Plugin removed.');
-    }).catch(e => console.log(e));  
-  
+    }).catch(e => console.log(e));
+
+  console.log('Remove organization...');
+  apiman({}).removeOrganization('bucharest-gold')
+    .then(x => {
+      t.equal(x, 204);
+      t.end();
+      console.log('Organization removed.');
+    }).catch(e => console.log(e));
+
 });
