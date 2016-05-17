@@ -30,7 +30,7 @@ test('setup', (t) => {
 
 });
 
-test('Apiman should verify the status.', (t) => {
+test('The client should verify the status.', (t) => {
 
   apiman({}).status()
     .then(x => {
@@ -40,7 +40,7 @@ test('Apiman should verify the status.', (t) => {
 
 });
 
-test('Apiman should list configured gateways.', (t) => {
+test('The client should list configured gateways.', (t) => {
 
   apiman({}).listGateways()
     .then(x => {
@@ -51,7 +51,7 @@ test('Apiman should list configured gateways.', (t) => {
 
 });
 
-test('Apiman should create a gateway.', (t) => {
+test('The client should create a gateway.', (t) => {
 
   let config = JSON.stringify({
     endpoint: 'http://localhost:8080/apiman-gateway-api-new',
@@ -75,7 +75,7 @@ test('Apiman should create a gateway.', (t) => {
 
 });
 
-test('Apiman should export the data.', (t) => {
+test('The client should export the data.', (t) => {
 
   apiman({}).exportData()
     .then(x => {
@@ -84,7 +84,7 @@ test('Apiman should export the data.', (t) => {
     }).catch(e => console.log(e));
 });
 
-test('Apiman should list permissions.', (t) => {
+test('The client should list permissions.', (t) => {
 
   apiman({}).listPermissions()
     .then(x => {
@@ -94,7 +94,7 @@ test('Apiman should list permissions.', (t) => {
 
 });
 
-test('Apiman should list plugins.', (t) => {
+test('The client should list plugins.', (t) => {
 
   apiman({}).listPlugins()
     .then(x => {
@@ -105,7 +105,7 @@ test('Apiman should list plugins.', (t) => {
 
 });
 
-test('Apiman should list roles.', (t) => {
+test('The client should list roles.', (t) => {
 
   apiman({}).listRoles()
     .then(x => {
@@ -116,7 +116,7 @@ test('Apiman should list roles.', (t) => {
 
 });
 
-test('Apiman should list policy definitions.', (t) => {
+test('The client should list policy definitions.', (t) => {
 
   apiman({}).listPolicyDefs()
     .then(x => {
@@ -127,7 +127,7 @@ test('Apiman should list policy definitions.', (t) => {
 
 });
 
-test('Apiman should list current user API organizations.', (t) => {
+test('The client should list current user API organizations.', (t) => {
 
   apiman({}).listCurrentUserAPIOrganizations()
     .then(x => {
@@ -138,7 +138,7 @@ test('Apiman should list current user API organizations.', (t) => {
 
 });
 
-test('Apiman should list current user APIs.', (t) => {
+test('The client should list current user APIs.', (t) => {
 
   apiman({}).listCurrentUserAPIs()
     .then(x => {
@@ -149,7 +149,7 @@ test('Apiman should list current user APIs.', (t) => {
 
 });
 
-test('Apiman should list current user client organizations.', (t) => {
+test('The client should list current user client organizations.', (t) => {
 
   apiman({}).listCurrentUserClientOrganizations()
     .then(x => {
@@ -160,7 +160,7 @@ test('Apiman should list current user client organizations.', (t) => {
 
 });
 
-test('Apiman should list current user clients.', (t) => {
+test('The client should list current user clients.', (t) => {
 
   apiman({}).listCurrentUserClients()
     .then(x => {
@@ -171,7 +171,7 @@ test('Apiman should list current user clients.', (t) => {
 
 });
 
-test('Apiman should get informations about current user.', (t) => {
+test('The client should get informations about current user.', (t) => {
 
   apiman({}).currentUserInfo()
     .then(x => {
@@ -181,7 +181,17 @@ test('Apiman should get informations about current user.', (t) => {
 
 });
 
-test('Apiman should list current user organizations able to edit plans.', (t) => {
+test('The client should update informations about current user.', (t) => {
+
+  apiman({}).currentUserUpdate('admin2@example.org', 'The super admin.')
+    .then(x => {
+      t.equal(x, 204);
+      t.end();
+    }).catch(e => console.log(e));
+
+});
+
+test('The client should list current user organizations able to edit plans.', (t) => {
 
   apiman({}).listCurrentUserPlanOrganizations()
     .then(x => {
