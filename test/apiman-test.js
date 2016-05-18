@@ -42,7 +42,7 @@ test('The client should verify the status.', (t) => {
 
 test('The client should list configured gateways.', (t) => {
 
-  apiman({}).listGateways()
+  apiman({}).gateways()
     .then(x => {
       let gatewayFound = x.find(x => x.id === 'TheGateway');
       t.equal(gatewayFound.id, 'TheGateway');
@@ -67,7 +67,7 @@ test('The client should create a gateway.', (t) => {
     }
   };
 
-  apiman(options).createGateway()
+  apiman(options).gatewayAdd()
     .then(x => {
       t.equals(x.name, options.body.name);
       t.end();
@@ -86,7 +86,7 @@ test('The client should export the data.', (t) => {
 
 test('The client should list permissions.', (t) => {
 
-  apiman({}).listPermissions()
+  apiman({}).permissions()
     .then(x => {
       t.equal(x.userId, 'admin');
       t.end();
@@ -96,7 +96,7 @@ test('The client should list permissions.', (t) => {
 
 test('The client should list plugins.', (t) => {
 
-  apiman({}).listPlugins()
+  apiman({}).plugins()
     .then(x => {
       let pluginFound = x.find(x => x.name === 'Transformation Policy Plugin');
       t.equal(pluginFound.name, 'Transformation Policy Plugin');
@@ -107,7 +107,7 @@ test('The client should list plugins.', (t) => {
 
 test('The client should list roles.', (t) => {
 
-  apiman({}).listRoles()
+  apiman({}).roles()
     .then(x => {
       let roleFound = x.find(x => x.id === 'APIDeveloper');
       t.equal(roleFound.id, 'APIDeveloper');
@@ -118,7 +118,7 @@ test('The client should list roles.', (t) => {
 
 test('The client should list policy definitions.', (t) => {
 
-  apiman({}).listPolicyDefs()
+  apiman({}).policyDefinitions()
     .then(x => {
       let policyFound = x.find((x) => x.id === 'AuthorizationPolicy');
       t.equal(policyFound.id, 'AuthorizationPolicy');
@@ -205,25 +205,33 @@ test('The client should list current user organizations able to edit plans.', (t
 test('teardown', t => {
 
   console.log('Remove gateway...');
-  apiman({}).removeGateway('TheNewGateway3')
+  apiman({}).gatewayDelete('TheNewGateway3')
     .then(x => {
       t.equal(x, 204);
       console.log('Gateway removed.');
     }).catch(e => console.log(e));
 
   console.log('Remove plugin...');
-  apiman({}).removePlugin(1)
+  apiman({}).pluginDelete(1)
     .then(x => {
       t.equal(x, 204);
       console.log('Plugin removed.');
     }).catch(e => console.log(e));
 
   console.log('Remove organization...');
-  apiman({}).removeOrganization('bucharest-gold')
+  apiman({}).organizationDelete('bucharest-gold')
     .then(x => {
       t.equal(x, 204);
       t.end();
       console.log('Organization removed.');
     }).catch(e => console.log(e));
+    
+  console.log('Remove role...');
+  apiman({}).roleDelete('bucharest-gold')
+    .then(x => {
+      t.equal(x, 204);
+      t.end();
+      console.log('Role removed.');
+    }).catch(e => console.log(e));  
 
 });

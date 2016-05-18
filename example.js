@@ -9,12 +9,12 @@ const options = {
   password: 'admin123!'
 };
 
-apiman(options).status().then((a) => console.log(a.name));
+apiman(options).status().then(a => console.log(a.name));
 
 // #2 Using default username and password:
 const defaultOptions = { baseUrl: 'http://localhost:8080' };
 
-apiman(defaultOptions).listGateways().then((a) => console.log(a));
+apiman(defaultOptions).gateways().then(a => console.log(a));
 
 // #3 Testing a gateway:
 let config = JSON.stringify({
@@ -32,10 +32,8 @@ const opts = {
   }
 };
 
-apiman(opts).testGateway().then((a) => console.log(a)).catch((e) => console.log(e));
-
 // #4 Importing settings and using defaultOptions:
 apiman({})
   .importData(__dirname + '/test/fixtures/api-manager-export.json')
-  .then((x) => console.log(x))
-  .catch((error) => console.log(error));
+  .then(x => console.log(x))
+  .catch(err => console.log(err));

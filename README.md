@@ -18,14 +18,28 @@ or higher.
       password: 'yourAdminPassword'
     };
 
-    apiman(options).status()
-    .then((s) => console.log(s.name));
+    apiman(options)
+    .status()
+    .then(s => console.log(s.name));
 
     // Or using default admin username and password: 
 
-    apiman({ baseUrl: 'http://localhost:8080' })
-    .listGateways()
-    .then((gateways) => console.log(gateways));
+    apiman({ baseUrl: 'http://host:port' })
+    .gateways()
+    .then(g => console.log(g));
+
+## Currently you can use to
+
+* Verify the Apiman status.
+* Import / export all the Apiman configuration data.
+* List, add and delete gateways.
+* List all the permissions.
+* List and delete plugins.
+* List and delete roles.
+* List all policy definitions.
+* Get informations (APIs, Clients, etc..) about the current authenticated user.
+* Update email and full name of the current authenticated user.
+* Delete an organization. 
 
 ## API Documentation
 
