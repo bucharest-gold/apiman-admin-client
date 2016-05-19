@@ -51,6 +51,16 @@ test('The client should return configured gateways.', (t) => {
 
 });
 
+test('The client should return one gateway.', (t) => {
+
+  apiman({}).gateway('TheGateway')
+    .then(x => {
+      t.equal(x.id, 'TheGateway');
+      t.end();
+    }).catch(e => console.log(e));
+
+});
+
 test('The client should add a gateway.', (t) => {
 
   let config = JSON.stringify({
@@ -94,6 +104,17 @@ test('The client should return permissions.', (t) => {
 
 });
 
+test('The client should return permissions of the user.', (t) => {
+
+  apiman({}).permissionsUser('admin')
+    .then(x => {
+      let permissionFound = x.permissions.find(x => x.name === 'apiAdmin');
+      t.equal(permissionFound.name, 'apiAdmin');
+      t.end();
+    }).catch(e => console.log(e));
+
+});
+
 test('The client should return plugins.', (t) => {
 
   apiman({}).plugins()
@@ -111,6 +132,17 @@ test('The client should return roles.', (t) => {
     .then(x => {
       let roleFound = x.find(x => x.id === 'APIDeveloper');
       t.equal(roleFound.id, 'APIDeveloper');
+      t.end();
+    }).catch(e => console.log(e));
+
+});
+
+test('The client should return one role.', (t) => {
+
+  apiman({}).role('ClientAppDeveloper')
+    .then(x => {
+      console.log(x);
+      t.equal(x.id, 'ClientAppDeveloper');
       t.end();
     }).catch(e => console.log(e));
 
@@ -202,6 +234,16 @@ test('The client should return current user organizations able to edit plans.', 
 
 });
 
+test('The client should return one organization.', (t) => {
+
+  apiman({}).organization('bucharest-gold')
+    .then(x => {
+      t.equal(x.id, 'bucharest-gold');
+      t.end();
+    }).catch(e => console.log(e));
+
+});
+
 test('teardown', t => {
 
   console.log('Remove gateway...');
@@ -222,12 +264,11 @@ test('teardown', t => {
   apiman({}).organizationDelete('bucharest-gold')
     .then(x => {
       t.equal(x, 204);
-      t.end();
       console.log('Organization removed.');
     }).catch(e => console.log(e));
     
   console.log('Remove role...');
-  apiman({}).roleDelete('bucharest-gold')
+  apiman({}).roleDelete('APIDeveloper')
     .then(x => {
       t.equal(x, 204);
       t.end();

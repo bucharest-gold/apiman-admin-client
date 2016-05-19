@@ -33,7 +33,7 @@ or higher.
 * Verify the Apiman status.
 * Import / export all the Apiman configuration data.
 * List, add and delete gateways.
-* List all the permissions.
+* List all the permissions and permissions by user.
 * List and delete plugins.
 * List and delete roles.
 * List all policy definitions.
