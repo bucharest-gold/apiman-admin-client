@@ -40,7 +40,7 @@ test('The client should verify the status.', (t) => {
 
 });
 
-test('The client should list configured gateways.', (t) => {
+test('The client should return configured gateways.', (t) => {
 
   apiman({}).gateways()
     .then(x => {
@@ -51,7 +51,7 @@ test('The client should list configured gateways.', (t) => {
 
 });
 
-test('The client should create a gateway.', (t) => {
+test('The client should add a gateway.', (t) => {
 
   let config = JSON.stringify({
     endpoint: 'http://localhost:8080/apiman-gateway-api-new',
@@ -84,7 +84,7 @@ test('The client should export the data.', (t) => {
     }).catch(e => console.log(e));
 });
 
-test('The client should list permissions.', (t) => {
+test('The client should return permissions.', (t) => {
 
   apiman({}).permissions()
     .then(x => {
@@ -94,7 +94,7 @@ test('The client should list permissions.', (t) => {
 
 });
 
-test('The client should list plugins.', (t) => {
+test('The client should return plugins.', (t) => {
 
   apiman({}).plugins()
     .then(x => {
@@ -105,7 +105,7 @@ test('The client should list plugins.', (t) => {
 
 });
 
-test('The client should list roles.', (t) => {
+test('The client should return roles.', (t) => {
 
   apiman({}).roles()
     .then(x => {
@@ -116,7 +116,7 @@ test('The client should list roles.', (t) => {
 
 });
 
-test('The client should list policy definitions.', (t) => {
+test('The client should return policy definitions.', (t) => {
 
   apiman({}).policyDefinitions()
     .then(x => {
@@ -127,9 +127,9 @@ test('The client should list policy definitions.', (t) => {
 
 });
 
-test('The client should list current user API organizations.', (t) => {
+test('The client should return current user API organizations.', (t) => {
 
-  apiman({}).listCurrentUserAPIOrganizations()
+  apiman({}).currentUserAPIOrganizations()
     .then(x => {
       let organizationFound = x.find(x => x.id === 'bucharest-gold');
       t.equal(organizationFound.id, 'bucharest-gold');
@@ -138,9 +138,9 @@ test('The client should list current user API organizations.', (t) => {
 
 });
 
-test('The client should list current user APIs.', (t) => {
+test('The client should return current user APIs.', (t) => {
 
-  apiman({}).listCurrentUserAPIs()
+  apiman({}).currentUserAPIs()
     .then(x => {
       let apiFound = x.find(x => x.id === 'testAPI');
       t.equal(apiFound.id, 'testAPI');
@@ -149,9 +149,9 @@ test('The client should list current user APIs.', (t) => {
 
 });
 
-test('The client should list current user client organizations.', (t) => {
+test('The client should return current user client organizations.', (t) => {
 
-  apiman({}).listCurrentUserClientOrganizations()
+  apiman({}).currentUserClientOrganizations()
     .then(x => {
       let organizationFound = x.find(x => x.id === 'bucharest-gold');
       t.equal(organizationFound.id, 'bucharest-gold');
@@ -160,9 +160,9 @@ test('The client should list current user client organizations.', (t) => {
 
 });
 
-test('The client should list current user clients.', (t) => {
+test('The client should return current user clients.', (t) => {
 
-  apiman({}).listCurrentUserClients()
+  apiman({}).currentUserClients()
     .then(x => {
       let clientAppFound = x.find(x => x.id === 'bucharest-gold-client-app');
       t.equal(clientAppFound.id, 'bucharest-gold-client-app');
@@ -191,9 +191,9 @@ test('The client should update informations about current user.', (t) => {
 
 });
 
-test('The client should list current user organizations able to edit plans.', (t) => {
+test('The client should return current user organizations able to edit plans.', (t) => {
 
-  apiman({}).listCurrentUserPlanOrganizations()
+  apiman({}).currentUserPlanOrganizations()
     .then(x => {
       let organizationFound = x.find(x => x.id === 'bucharest-gold');
       t.equal(organizationFound.id, 'bucharest-gold');
