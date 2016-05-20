@@ -63,23 +63,22 @@ test('The client should return one gateway.', (t) => {
 
 test('The client should add a gateway.', (t) => {
 
-  let config = JSON.stringify({
+  let configuration = JSON.stringify({
     endpoint: 'http://localhost:8080/apiman-gateway-api-new',
-    username: 'foo', password: 'bar'
+    username: 'foo',
+    password: 'bar'
   });
 
-  let options = {
-    body: {
-      name: 'The New Gateway3',
-      description: 'This is the new gateway.',
-      type: 'REST',
-      configuration: config
-    }
+  let gw = {
+    name: 'The New Gateway3',
+    description: 'This is the new gateway.',
+    type: 'REST',
+    configuration: configuration
   };
 
-  apiman(options).gatewayAdd()
+  apiman({}).gatewayAdd(gw)
     .then(x => {
-      t.equals(x.name, options.body.name);
+      t.equals(x.name, gw.name);
       t.end();
     }).catch(e => console.log(e));
 
@@ -115,12 +114,33 @@ test('The client should return permissions of the user.', (t) => {
 
 });
 
+test('The client should return one plugin.', (t) => {
+
+  apiman({}).plugin(1)
+    .then(x => {
+      t.equal(x.id, 1);
+      t.end();
+    }).catch(e => console.log(e));
+
+});
+
 test('The client should return plugins.', (t) => {
 
   apiman({}).plugins()
     .then(x => {
       let pluginFound = x.find(x => x.name === 'Transformation Policy Plugin');
       t.equal(pluginFound.name, 'Transformation Policy Plugin');
+      t.end();
+    }).catch(e => console.log(e));
+
+});
+
+test('The client should return available plugins.', (t) => {
+
+  apiman({}).availablePlugins()
+    .then(x => {
+      let availablePluginFound = x.find(x => x.artifactId === 'apiman-plugins-cors-policy');
+      t.equal(availablePluginFound.artifactId, 'apiman-plugins-cors-policy');
       t.end();
     }).catch(e => console.log(e));
 
@@ -142,6 +162,16 @@ test('The client should return one role.', (t) => {
   apiman({}).role('ClientAppDeveloper')
     .then(x => {
       t.equal(x.id, 'ClientAppDeveloper');
+      t.end();
+    }).catch(e => console.log(e));
+
+});
+
+test('The client should return one policy definition.', (t) => {
+
+  apiman({}).policyDefinition('AuthorizationPolicy')
+    .then(x => {
+      t.equal(x.id, 'AuthorizationPolicy');
       t.end();
     }).catch(e => console.log(e));
 
@@ -238,6 +268,26 @@ test('The client should return one organization.', (t) => {
   apiman({}).organization('bucharest-gold')
     .then(x => {
       t.equal(x.id, 'bucharest-gold');
+      t.end();
+    }).catch(e => console.log(e));
+
+});
+
+test('The client should create one organization.', (t) => {
+
+  apiman({}).organizationAdd('bucharest-gold2', 'the super org.')
+    .then(x => {
+      t.equal(x.name, 'bucharest-gold2');
+      t.end();
+    }).catch(e => console.log(e));
+
+});
+
+test('The client should return one user.', (t) => {
+
+  apiman({}).user('admin')
+    .then(x => {
+      t.equal(x.username, 'admin');
       t.end();
     }).catch(e => console.log(e));
 
