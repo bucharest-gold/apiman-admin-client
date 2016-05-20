@@ -141,7 +141,6 @@ test('The client should return one role.', (t) => {
 
   apiman({}).role('ClientAppDeveloper')
     .then(x => {
-      console.log(x);
       t.equal(x.id, 'ClientAppDeveloper');
       t.end();
     }).catch(e => console.log(e));
@@ -244,35 +243,64 @@ test('The client should return one organization.', (t) => {
 
 });
 
-test('teardown', t => {
+test('The client should remove one gateway.', (t) => {
 
-  console.log('Remove gateway...');
   apiman({}).gatewayDelete('TheNewGateway3')
     .then(x => {
       t.equal(x, 204);
+      t.end();
       console.log('Gateway removed.');
     }).catch(e => console.log(e));
 
-  console.log('Remove plugin...');
+});
+
+test('The client should remove one plugin.', (t) => {
+
   apiman({}).pluginDelete(1)
     .then(x => {
       t.equal(x, 204);
+      t.end();
       console.log('Plugin removed.');
     }).catch(e => console.log(e));
 
-  console.log('Remove organization...');
+});
+
+test('The client should remove one organization.', (t) => {
+
   apiman({}).organizationDelete('bucharest-gold')
     .then(x => {
       t.equal(x, 204);
+      t.end();
       console.log('Organization removed.');
     }).catch(e => console.log(e));
-    
-  console.log('Remove role...');
+
+});
+
+test('The client should remove one role.', (t) => {
+
   apiman({}).roleDelete('APIDeveloper')
     .then(x => {
       t.equal(x, 204);
       t.end();
       console.log('Role removed.');
-    }).catch(e => console.log(e));  
+    }).catch(e => console.log(e));
+
+});
+
+test('The client should remove one policy definition.', (t) => {
+
+  apiman({}).policyDefinitionDelete('AuthorizationPolicy')
+    .then(x => {
+      t.equal(x, 204);
+      t.end();
+      console.log('Policy definition removed.');
+    }).catch(e => console.log(e));
+
+});
+
+test('teardown', t => {
+
+  console.log('done.');
+  t.end();
 
 });
