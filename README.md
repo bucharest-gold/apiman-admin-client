@@ -10,7 +10,10 @@ It is experimental and still a work in progress.
 N.B. This module uses ES6 language features, and as such depends on Node.js version 5.x
 or higher.
 
+    npm install apiman-admin-client -S
+
 ## Usage
+    const apiman = require('apiman-admin-client');
 
     const options = {
       baseUrl: 'http://localhost:8080',
@@ -21,12 +24,14 @@ or higher.
     apiman(options)
     .status()
     .then(s => console.log(s.name));
-
-    // Or using default admin username and password: 
-
+    
+    // Apiman default user / password 
     apiman({ baseUrl: 'http://host:port' })
     .gateways()
     .then(g => console.log(g));
+    
+    // All defaults
+    apiman({}).plugins().then((p) => console.log(p));
 
 ## Currently you can use to
 

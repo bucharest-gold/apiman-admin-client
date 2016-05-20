@@ -15,6 +15,9 @@
     "Client"
   ],
   "author": "Red Hat, Inc.",
+  "engines": {
+    "node": ">= 5.0.0"
+  },
   "license": "Apache-2.0",
   "devDependencies": {
     "ink-docstrap": "^1.1.4",
