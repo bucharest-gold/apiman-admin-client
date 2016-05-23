@@ -124,6 +124,23 @@ test('The client should return one plugin.', (t) => {
 
 });
 
+test('The client should add one plugin.', (t) => {
+
+  let plug = {
+    type: 'war',
+    version: '1.2.5.Final',
+    groupId: 'io.apiman.plugins',
+    artifactId: 'apiman-plugins-log-policy'
+  };
+
+  apiman({}).pluginAdd(plug)
+    .then(x => {
+      t.equal(x.artifactId, 'apiman-plugins-log-policy');
+      t.end();
+    }).catch(e => console.log(e));
+
+});
+
 test('The client should return plugins.', (t) => {
 
   apiman({}).plugins()
