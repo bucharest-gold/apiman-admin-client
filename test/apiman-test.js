@@ -116,9 +116,9 @@ test('The client should return permissions of the user.', (t) => {
 
 test('The client should return one plugin.', (t) => {
 
-  apiman({}).plugin(1)
+  apiman({}).plugin(999)
     .then(x => {
-      t.equal(x.id, 1);
+      t.equal(x.id, 999);
       t.end();
     }).catch(e => console.log(e));
 
@@ -323,7 +323,7 @@ test('The client should remove one gateway.', (t) => {
 
 test('The client should remove one plugin.', (t) => {
 
-  apiman({}).pluginDelete(1)
+  apiman({}).pluginDelete(999)
     .then(x => {
       t.equal(x, 204);
       t.end();

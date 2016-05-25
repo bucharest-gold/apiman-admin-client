@@ -32,7 +32,7 @@
     "configuration" : "{\"endpoint\":\"http://localhost:8080/apiman-gateway-api-new\",\"username\":\"foo\",\"password\":\"$CRYPT::mE3e3io+OWPrWlbVuFyHRg==\"}"
   } ],
   "Plugins" : [ {
-    "id" : 1,
+    "id" : 999,
     "groupId" : "io.apiman.plugins",
     "artifactId" : "apiman-plugins-transformation-policy",
     "version" : "1.2.6.Final",
