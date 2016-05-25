@@ -1,7 +1,7 @@
 {
   "Metadata" : {
     "exportedOn" : "2016-05-17T12:49:25Z",
-    "apimanVersion" : "1.2.5.Final"
+    "apimanVersion" : "1.2.6.Final"
   },
   "Users" : [ {
     "username" : "admin",
@@ -35,7 +35,7 @@
     "id" : 1,
     "groupId" : "io.apiman.plugins",
     "artifactId" : "apiman-plugins-transformation-policy",
-    "version" : "1.2.5.Final",
+    "version" : "1.2.6.Final",
     "name" : "Transformation Policy Plugin",
     "description" : "This plugin provides a very simple policy which can transform the request and/or response payload between XML and JSON.",
     "createdBy" : "admin",

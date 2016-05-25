@@ -128,7 +128,7 @@ test('The client should add one plugin.', (t) => {
 
   let plug = {
     type: 'war',
-    version: '1.2.5.Final',
+    version: '1.2.6.Final',
     groupId: 'io.apiman.plugins',
     artifactId: 'apiman-plugins-log-policy'
   };
