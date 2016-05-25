@@ -30,21 +30,21 @@ or higher.
     .gateways()
     .then(g => console.log(g));
     
-    // All defaults
+    // All defaults [ localhost ]
     apiman({}).plugins().then((p) => console.log(p));
 
-## Currently you can use to
+## You can use to
 
 * Verify the Apiman status.
-* Import / export all the Apiman configuration data.
-* List, add and delete gateways.
+* Import / export the Apiman configuration data.
+* List, add, delete gateways.
 * List all the permissions and permissions by user.
-* List and delete plugins.
+* List, add, delete plugins.
 * List and delete roles.
-* List all policy definitions.
+* List and delete policy definitions.
 * Get informations (APIs, Clients, etc..) about the current authenticated user.
 * Update email and full name of the current authenticated user.
-* Delete an organization. 
+* Get, add, delete an organization. 
 
 ## API Documentation
 
