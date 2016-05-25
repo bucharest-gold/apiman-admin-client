@@ -21,6 +21,6 @@ function waitForServer {
 }
 
 docker pull ${APIMAN}
-docker run -i -p 8080:8080 -p 8443:8443 ${APIMAN} > apiman.log 2>&1 &
+docker run -i -p 8080:8080 -p 8443:8443 ${APIMAN} > ../apiman.log 2>&1 &
 
 waitForServer
