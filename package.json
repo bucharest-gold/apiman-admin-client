@@ -1,6 +1,6 @@
 {
   "name": "apiman-admin-client",
-  "version": "0.2.0",
+  "version": "0.1.0",
   "description": "Node.js client for the Apiman admin API.",
   "main": "index.js",
   "scripts": {
@@ -18,6 +18,12 @@
   "engines": {
     "node": ">= 5.0.0"
   },
+  "homepage": "https://github.com/bucharest-gold/apiman-admin-client#readme",
+  "repository": {
+    "type": "git",
+    "url": "bucharest-gold/apiman-admin-client"
+  },
+  "bugs": "https://github.com/bucharest-gold/apiman-admin-client/issues",
   "license": "Apache-2.0",
   "devDependencies": {
     "ink-docstrap": "^1.1.4",
