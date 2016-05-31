@@ -9,6 +9,12 @@
     "coverage": "./node_modules/.bin/istanbul cover tape -- test/**.js",
     "docs": "./node_modules/.bin/jsdoc -d docs -t ./node_modules/ink-docstrap/template -R README.md lib/apiman.js"
   },
+  "files": [
+    "index.js",
+    "lib",
+    "test",
+    "doc"
+  ],
   "keywords": [
     "Apiman",
     "REST",
