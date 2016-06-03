@@ -31,7 +31,7 @@ or higher.
     .gateways()
     .then(g => console.log(g));
     
-    // All defaults [ localhost ]
+    // All defaults [ localhost ] 
     apiman({}).plugins().then((p) => console.log(p));
 
 ## You can use to
@@ -46,6 +46,8 @@ or higher.
 * Get informations (APIs, Clients, etc..) about the current authenticated user.
 * Update email and full name of the current authenticated user.
 * Get, add, delete an organization. 
+* Get informations (APIs, Clients, etc..) about specific user.
+* Update email and full name for a specific user.
 
 ## API Documentation
 
