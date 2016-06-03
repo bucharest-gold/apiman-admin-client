@@ -1,8 +1,9 @@
 # apiman-admin-client
 
-[![Build Status](https://travis-ci.org/bucharest-gold/apiman-admin-client.svg?branch=master)](https://travis-ci.org/bucharest-gold/apiman-admin-client)
-
 Node.js client for the Apiman admin API.
+
+[![Build Status](https://travis-ci.org/bucharest-gold/apiman-admin-client.svg?branch=master)](https://travis-ci.org/bucharest-gold/apiman-admin-client)
+[![Coverage Status](https://coveralls.io/repos/github/bucharest-gold/apiman-admin-client/badge.svg?branch=master)](https://coveralls.io/github/bucharest-gold/apiman-admin-client?branch=master)
 
 This package provides a Node.js client for the [Apiman REST services][1].
 It is experimental and still a work in progress.
