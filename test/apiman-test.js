@@ -310,6 +310,50 @@ test('The client should return one user.', (t) => {
 
 });
 
+test('The client should update informations about user.', (t) => {
+
+  apiman.userUpdate('admin', 'admin3@example.org', 'The super admin again.')
+    .then(x => {
+      t.equal(x, 204);
+      t.end();
+    }).catch(e => console.log(e));
+
+});
+
+
+test('The client should return user APIs.', (t) => {
+
+  apiman.userAPIs('admin')
+    .then(x => {
+      let apiFound = x.find(x => x.id === 'testAPI');
+      t.equal(apiFound.id, 'testAPI');
+      t.end();
+    }).catch(e => console.log(e));
+
+});
+
+test('The client should return user organizations.', (t) => {
+
+  apiman.userOrganizations('admin')
+    .then(x => {
+      let organizationFound = x.find(x => x.id === 'bucharest-gold');
+      t.equal(organizationFound.id, 'bucharest-gold');
+      t.end();
+    }).catch(e => console.log(e));
+
+});
+
+test('The client should return user clients.', (t) => {
+
+  apiman.userClients('admin')
+    .then(x => {
+      let clientAppFound = x.find(x => x.id === 'bucharest-gold-client-app');
+      t.equal(clientAppFound.id, 'bucharest-gold-client-app');
+      t.end();
+    }).catch(e => console.log(e));
+
+});
+
 test('The client should remove one gateway.', (t) => {
 
   apiman.gatewayDelete('TheNewGateway3')
