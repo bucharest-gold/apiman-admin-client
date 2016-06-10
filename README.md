@@ -8,8 +8,7 @@ Node.js client for the Apiman admin API.
 This package provides a Node.js client for the [Apiman REST services][1].
 It is experimental and still a work in progress.
 
-N.B. This module uses ES6 language features, and as such depends on Node.js version 5.x
-or higher.
+N.B. This module uses ES6 language features, and as such depends on Node.js version 4.x or higher.
 
     npm install apiman-admin-client -S
 
