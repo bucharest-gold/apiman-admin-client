@@ -10,6 +10,12 @@ It is experimental and still a work in progress.
 
 N.B. This module uses ES6 language features, and as such depends on Node.js version 4.x or higher.
 
+## Contributing
+
+Please read the [contributing guide](./CONTRIBUTING.md)
+
+## Installation
+
     npm install apiman-admin-client -S
 
 ## Usage
@@ -56,17 +62,5 @@ If you have the github rights to do it, you can publish the API documentation by
 `./build/publish-docs.sh`. This script will generate the documentation, then clone this
 repository into a temporary directory, checkout the `gh-pages` branch and update it with
 the newly generated documentation.
-
-## Development & Testing
-
-To run the tests, you'll need to have docker installed and a Apiman server running using the 
-Apiman docker image. Just run`./build/start-server.sh`. This script will download and start the docker
-image.
-
-Then just run the tests.
-
-    make test
-
-To stop the server, run `./build/stop-server.sh`.
 
 [1]: http://www.apiman.io/latest/api-manager-restdocs.html
