@@ -24,7 +24,7 @@ test('setup', (t) => {
   apiman
     .importData(require('path').join(__dirname, '/fixtures/api-manager-export.json'))
     .then(x => {
-      t.equals(x.indexOf('Data import completed successfully!') > 0, true);
+      t.equals(x.includes('Data import completed successfully!'), true);
       t.end();
     }).catch(e => console.log(e));
 });
@@ -78,7 +78,7 @@ test('The client should add a gateway.', (t) => {
 test('The client should export the data.', (t) => {
   apiman.exportData()
     .then(x => {
-      t.equal(x.Metadata.apimanVersion.indexOf('Final') > 0, true);
+      t.equal(x.Metadata.apimanVersion.includes('Final'), true);
       t.end();
     }).catch(e => console.log(e));
 });
