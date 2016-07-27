@@ -41,6 +41,6 @@
     "tape": "^4.5.1"
   },
   "dependencies": {
-    "roi": "file:../roi"
+    "roi": "^0.7.0"
   }
 }

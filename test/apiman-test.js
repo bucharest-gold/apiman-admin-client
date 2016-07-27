@@ -17,7 +17,7 @@
 'use strict';
 
 const test = require('tape');
-const apiman = require('../lib/apiman');
+const apiman = require('../index');
 
 function getOptions () {
   const options = {
@@ -201,149 +201,145 @@ test('Should return current user APIs.', t => {
     }).catch(e => console.log(e));
 });
 
-// test('The client should return current user client organizations.', (t) => {
-//   apiman.currentUserClientOrganizations()
-//     .then(x => {
-//       let organizationFound = x.find(x => x.id === 'bucharest-gold')
-//       t.equal(organizationFound.id, 'bucharest-gold')
-//       t.end()
-//     }).catch(e => console.log(e))
-// })
+test('Should return current user client organizations.', t => {
+  apiman.currentUserClientOrganizations(getOptions())
+    .then(x => {
+      const organizationFound = JSON.parse(x).find(x => x.id === 'bucharest-gold');
+      t.equal(organizationFound.id, 'bucharest-gold');
+      t.end();
+    }).catch(e => console.log(e));
+});
 
-// test('The client should return current user clients.', (t) => {
-//   apiman.currentUserClients()
-//     .then(x => {
-//       let clientAppFound = x.find(x => x.id === 'bucharest-gold-client-app')
-//       t.equal(clientAppFound.id, 'bucharest-gold-client-app')
-//       t.end()
-//     }).catch(e => console.log(e))
-// })
+test('Should return current user clients.', t => {
+  apiman.currentUserClients(getOptions())
+    .then(x => {
+      const clientAppFound = JSON.parse(x).find(x => x.id === 'bucharest-gold-client-app');
+      t.equal(clientAppFound.id, 'bucharest-gold-client-app');
+      t.end();
+    }).catch(e => console.log(e));
+});
 
-// test('The client should get informations about current user.', (t) => {
-//   apiman.currentUserInfo()
-//     .then(x => {
-//       t.equal(x.username, 'admin')
-//       t.end()
-//     }).catch(e => console.log(e))
-// })
+test('Should get informations about current user.', t => {
+  apiman.currentUserInfo(getOptions())
+    .then(x => {
+      t.equal(JSON.parse(x).username, 'admin');
+      t.end();
+    }).catch(e => console.log(e));
+});
 
-// test('The client should update informations about current user.', (t) => {
-//   apiman.currentUserUpdate('admin2@example.org', 'The super admin.')
-//     .then(x => {
-//       t.equal(x, 204)
-//       t.end()
-//     }).catch(e => console.log(e))
-// })
+test('Should update informations about current user.', t => {
+  apiman.currentUserUpdate(getOptions(), 'admin2@example.org', 'The super admin.')
+    .then(x => {
+      t.equal(x.statusCode, 204);
+      t.end();
+    }).catch(e => console.log(e));
+});
 
-// test('The client should return current user organizations able to edit plans.', (t) => {
-//   apiman.currentUserPlanOrganizations()
-//     .then(x => {
-//       let organizationFound = x.find(x => x.id === 'bucharest-gold')
-//       t.equal(organizationFound.id, 'bucharest-gold')
-//       t.end()
-//     }).catch(e => console.log(e))
-// })
+test('Should return current user organizations able to edit plans.', t => {
+  apiman.currentUserPlanOrganizations(getOptions())
+    .then(x => {
+      const organizationFound = JSON.parse(x).find(x => x.id === 'bucharest-gold');
+      t.equal(organizationFound.id, 'bucharest-gold');
+      t.end();
+    }).catch(e => console.log(e));
+});
 
-// test('The client should return one organization.', (t) => {
-//   apiman.organization('bucharest-gold')
+// test('Should return one organization.', t => {
+//   apiman.organization(getOptions(), 'bucharest-gold')
 //     .then(x => {
-//       t.equal(x.id, 'bucharest-gold')
-//       t.end()
-//     }).catch(e => console.log(e))
-// })
+//       t.equal(JSON.parse(x).id, 'bucharest-gold');
+//       t.end();
+//     }).catch(e => console.log(e));
+// });
 
-// test('The client should create one organization.', (t) => {
-//   apiman.organizationAdd('bucharest-gold2', 'the super org.')
+// test('Should create one organization.', t => {
+//   apiman.organizationAdd(getOptions(), 'bucharest-gold2', 'the super org.')
 //     .then(x => {
-//       t.equal(x.name, 'bucharest-gold2')
-//       t.end()
-//     }).catch(e => console.log(e))
-// })
+//       t.equal(JSON.parse(x).name, 'bucharest-gold2');
+//       t.end();
+//     }).catch(e => console.log(e));
+// });
 
-// test('The client should return one user.', (t) => {
-//   apiman.user('admin')
-//     .then(x => {
-//       t.equal(x.username, 'admin')
-//       t.end()
-//     }).catch(e => console.log(e))
-// })
+test('Should return one user.', t => {
+  apiman.user(getOptions(), 'admin')
+    .then(x => {
+      t.equal(JSON.parse(x).username, 'admin');
+      t.end();
+    }).catch(e => console.log(e));
+});
 
-// test('The client should update informations about user.', (t) => {
-//   apiman.userUpdate('admin', 'admin3@example.org', 'The super admin again.')
-//     .then(x => {
-//       t.equal(x, 204)
-//       t.end()
-//     }).catch(e => console.log(e))
-// })
+test('Should update informations about user.', t => {
+  apiman.userUpdate(getOptions(), 'admin', 'admin3@example.org', 'The super admin again.')
+    .then(x => {
+      t.equal(x.statusCode, 204);
+      t.end();
+    }).catch(e => console.log(e));
+});
 
-// test('The client should return user APIs.', (t) => {
-//   apiman.userAPIs('admin')
-//     .then(x => {
-//       let apiFound = x.find(x => x.id === 'testAPI')
-//       t.equal(apiFound.id, 'testAPI')
-//       t.end()
-//     }).catch(e => console.log(e))
-// })
+test('Should return user APIs.', t => {
+  apiman.userAPIs(getOptions(), 'admin')
+    .then(x => {
+      const apiFound = JSON.parse(x).find(x => x.id === 'testAPI');
+      t.equal(apiFound.id, 'testAPI');
+      t.end();
+    }).catch(e => console.log(e));
+});
 
-// test('The client should return user organizations.', (t) => {
-//   apiman.userOrganizations('admin')
-//     .then(x => {
-//       let organizationFound = x.find(x => x.id === 'bucharest-gold')
-//       t.equal(organizationFound.id, 'bucharest-gold')
-//       t.end()
-//     }).catch(e => console.log(e))
-// })
+test('Should return user organizations.', t => {
+  apiman.userOrganizations(getOptions(), 'admin')
+    .then(x => {
+      const organizationFound = JSON.parse(x).find(x => x.id === 'bucharest-gold');
+      t.equal(organizationFound.id, 'bucharest-gold');
+      t.end();
+    }).catch(e => console.log(e));
+});
 
-// test('The client should return user clients.', (t) => {
-//   apiman.userClients('admin')
-//     .then(x => {
-//       let clientAppFound = x.find(x => x.id === 'bucharest-gold-client-app')
-//       t.equal(clientAppFound.id, 'bucharest-gold-client-app')
-//       t.end()
-//     }).catch(e => console.log(e))
-// })
+test('Should return user clients.', t => {
+  apiman.userClients(getOptions(), 'admin')
+    .then(x => {
+      const clientAppFound = JSON.parse(x).find(x => x.id === 'bucharest-gold-client-app');
+      t.equal(clientAppFound.id, 'bucharest-gold-client-app');
+      t.end();
+    }).catch(e => console.log(e));
+});
 
-// test('The client should remove one gateway.', (t) => {
-//   apiman.gatewayDelete('TheNewGateway3')
-//     .then(x => {
-//       t.equal(x, 204)
-//       t.end()
-//       console.log('Gateway removed.')
-//     }).catch(e => console.log(e))
-// })
+test('Should remove one gateway.', t => {
+  apiman.gatewayDelete(getOptions(), 'TheNewGateway3')
+    .then(x => {
+      t.equal(x.statusCode, 204);
+      t.end();
+      console.log('Gateway removed.');
+    }).catch(e => console.log(e));
+});
 
-// test('The client should remove one plugin.', (t) => {
-//   apiman.pluginDelete(999)
-//     .then(x => {
-//       t.equal(x, 204)
-//       t.end()
-//       console.log('Plugin removed.')
-//     }).catch(e => console.log(e))
-// })
+test('Should remove one plugin.', t => {
+  apiman.pluginDelete(getOptions(), 999)
+    .then(x => {
+      t.equal(x.statusCode, 204);
+      t.end();
+    }).catch(e => console.log(e));
+});
 
-// test('The client should remove one organization.', (t) => {
-//   apiman.organizationDelete('bucharest-gold')
+// test('Should remove one organization.', t => {
+//   apiman.organizationDelete(getOptions(), 'bucharest-gold')
 //     .then(x => {
-//       t.equal(x, 204)
-//       t.end()
-//       console.log('Organization removed.')
-//     }).catch(e => console.log(e))
-// })
+//       t.equal(x.statusCode, 204);
+//       t.end();
+//     }).catch(e => console.log(e));
+// });
 
-// test('The client should remove one role.', (t) => {
-//   apiman.roleDelete('APIDeveloper')
-//     .then(x => {
-//       t.equal(x, 204)
-//       t.end()
-//       console.log('Role removed.')
-//     }).catch(e => console.log(e))
-// })
+test('Should remove one role.', t => {
+  apiman.roleDelete(getOptions(), 'APIDeveloper')
+    .then(x => {
+      t.equal(x.statusCode, 204);
+      t.end();
+    }).catch(e => console.log(e));
+});
 
-// test('The client should remove one policy definition.', (t) => {
-//   apiman.policyDefinitionDelete('AuthorizationPolicy')
-//     .then(x => {
-//       t.equal(x, 204)
-//       t.end()
-//       console.log('Policy definition removed.')
-//     }).catch(e => console.log(e))
-// })
+test('Should remove one policy definition.', t => {
+  apiman.policyDefinitionDelete(getOptions(), 'AuthorizationPolicy')
+    .then(x => {
+      t.equal(x.statusCode, 204);
+      t.end();
+    }).catch(e => console.log(e));
+});
