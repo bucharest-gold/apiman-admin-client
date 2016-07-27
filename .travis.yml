@@ -12,8 +12,6 @@ script:
    - make ci
 after_script:
    - ./build/stop-server.sh
-notifications:
-  irc: "irc.freenode.org#brass-monkey"
 branches:
   only:
    - master
