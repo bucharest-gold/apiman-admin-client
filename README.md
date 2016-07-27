@@ -6,9 +6,8 @@ Node.js client for the Apiman admin API.
 [![Coverage Status](https://coveralls.io/repos/github/bucharest-gold/apiman-admin-client/badge.svg?branch=master)](https://coveralls.io/github/bucharest-gold/apiman-admin-client?branch=master)
 
 This package provides a Node.js client for the [Apiman REST services][1].
-It is experimental and still a work in progress.
 
-N.B. This module uses ES6 language features, and as such depends on Node.js version 4.x or higher.
+> _Node.js 4, 5, 6_
 
 ## Contributing
 
@@ -22,22 +21,23 @@ Please read the [contributing guide](./CONTRIBUTING.md)
     const apiman = require('apiman-admin-client');
 
     const options = {
-      baseUrl: 'http://localhost:8080',
-      username: 'yourAdminUsername',
-      password: 'yourAdminPassword'
+      'baseUrl': 'http://localhost:8080',
+      'username': 'admin',
+      'password': 'admin123!'
     };
 
-    apiman(options)
-    .status()
-    .then(s => console.log(s.name));
-    
-    // Apiman default user / password 
-    apiman({ baseUrl: 'http://host:port' })
-    .gateways()
-    .then(g => console.log(g));
-    
-    // All defaults [ localhost ] 
-    apiman({}).plugins().then((p) => console.log(p));
+    apiman.status(options)
+    .then(x => console.log(x))
+    .catch(e => console.log(e));
+
+    apiman.exportData(options)
+    .then(x => console.log(x))
+    .catch(e => console.log(e));
+
+    apiman.gateways(options)
+    .then(x => console.log(x))
+    .catch(e => console.log(e));
+
 
 ## You can use to
 

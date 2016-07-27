@@ -19,104 +19,102 @@
 const test = require('tape');
 const apiman = require('../lib/apiman');
 
-test('setup', (t) => {
+function getOptions () {
   const options = {
     'baseUrl': 'http://localhost:8080',
     'username': 'admin',
     'password': 'admin123!'
   };
+  return options;
+}
 
-  apiman.importData(options, require('path').join(__dirname, '/fixtures/api-manager-export.json'))
+test('setup', t => {
+  apiman.importData(getOptions(), require('path').join(__dirname, '/fixtures/api-manager-export.json'))
     .then(x => {
       t.equals(x.includes('Data import completed successfully!'), true);
       t.end();
     }).catch(e => console.log(e));
 });
 
-test('Should verify the status.', (t) => {
-  const options = {
-    'baseUrl': 'http://localhost:8080',
-    'username': 'admin',
-    'password': 'admin123!'
-  };
-
-  apiman.status(options)
+test('Should verify the status.', t => {
+  apiman.status(getOptions())
     .then(x => {
       t.equal(JSON.parse(x).name, 'API Manager REST API');
       t.end();
     }).catch(e => console.log(e));
 });
 
-// test('Should return configured gateways.', (t) => {
-//   apiman.gateways(options)
-//     .then(x => {
-//       let gatewayFound = x.find(x => x.id === 'TheGateway')
-//       t.equal(gatewayFound.id, 'TheGateway')
-//       t.end()
-//     }).catch(e => console.log(e))
-// })
+test('Should return configured gateways.', t => {
+  apiman.gateways(getOptions())
+    .then(x => {
+      x = JSON.parse(x);
+      let gatewayFound = x.find(x => x.id === 'TheGateway');
+      t.equal(gatewayFound.id, 'TheGateway');
+      t.end();
+    }).catch(e => console.log(e));
+});
 
-// test('Should return one gateway.', (t) => {
-//   apiman.gateway(options, 'TheGateway')
-//     .then(x => {
-//       t.equal(x.id, 'TheGateway')
-//       t.end()
-//     }).catch(e => console.log(e))
-// })
+test('Should return one gateway.', t => {
+  apiman.gateway(getOptions(), 'TheGateway')
+    .then(x => {
+      t.equal(JSON.parse(x).id, 'TheGateway');
+      t.end();
+    }).catch(e => console.log(e));
+});
 
-// test('Should add a gateway.', (t) => {
-//   let configuration = JSON.stringify({
-//     endpoint: 'http://localhost:8080/apiman-gateway-api-new',
-//     username: 'foo',
-//     password: 'bar'
-//   })
+test('Should add a gateway.', t => {
+  let configuration = JSON.stringify({
+    endpoint: 'http://localhost:8080/apiman-gateway-api-new',
+    username: 'foo',
+    password: 'bar'
+  });
 
-//   let gw = {
-//     name: 'The New Gateway3',
-//     description: 'This is the new gateway.',
-//     type: 'REST',
-//     configuration: configuration
-//   }
+  let gw = {
+    name: 'The New Gateway3',
+    description: 'This is the new gateway.',
+    type: 'REST',
+    configuration: configuration
+  };
 
-//   apiman.gatewayAdd(gw)
-//     .then(x => {
-//       t.equals(x.name, gw.name)
-//       t.end()
-//     }).catch(e => console.log(e))
-// })
+  apiman.gatewayAdd(getOptions(), gw)
+    .then(x => {
+      t.equals(x.statusCode, 200);
+      t.end();
+    }).catch(e => console.log(e));
+});
 
-// test('The client should export the data.', (t) => {
-//   apiman.exportData()
-//     .then(x => {
-//       t.equal(x.Metadata.apimanVersion.includes('Final'), true)
-//       t.end()
-//     }).catch(e => console.log(e))
-// })
+test('Should export the data.', t => {
+  apiman.exportData(getOptions())
+    .then(x => {
+      t.equal(x.toString().includes('Final'), true);
+      t.end();
+    }).catch(e => console.log(e));
+});
 
-// test('The client should return permissions.', (t) => {
-//   apiman.permissions()
-//     .then(x => {
-//       t.equal(x.userId, 'admin')
-//       t.end()
-//     }).catch(e => console.log(e))
-// })
+test('Should return permissions.', t => {
+  apiman.permissions(getOptions())
+    .then(x => {
+      t.equal(JSON.parse(x).userId, 'admin');
+      t.end();
+    }).catch(e => console.log(e));
+});
 
-// test('The client should return permissions of the user.', (t) => {
-//   apiman.permissionsUser('admin')
-//     .then(x => {
-//       let permissionFound = x.permissions.find(x => x.name === 'apiAdmin')
-//       t.equal(permissionFound.name, 'apiAdmin')
-//       t.end()
-//     }).catch(e => console.log(e))
-// })
+test('Should return permissions of the user.', t => {
+  apiman.permissionsUser(getOptions(), 'admin')
+    .then(x => {
+      const permissionFound = JSON.parse(x).permissions.find(x => x.name === 'apiAdmin');
+      t.equal(permissionFound.name, 'apiAdmin');
+      t.end();
+    }).catch(e => console.log(e));
+});
 
-// test('The client should return one plugin.', (t) => {
-//   apiman.plugin(999)
-//     .then(x => {
-//       t.equal(x.id, 999)
-//       t.end()
-//     }).catch(e => console.log(e))
-// })
+test('Should return one plugin.', t => {
+  apiman.plugin(getOptions(), 999)
+    .then(x => {
+      t.equal(JSON.parse(x).id, 999);
+      t.end();
+    }).catch(e => console.log(e));
+});
 
 // test('The client should add one plugin.', (t) => {
 //   let plug = {
