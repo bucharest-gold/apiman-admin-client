@@ -116,90 +116,90 @@ test('Should return one plugin.', t => {
     }).catch(e => console.log(e));
 });
 
-// test('The client should add one plugin.', (t) => {
-//   let plug = {
-//     type: 'war',
-//     version: '1.2.6.Final',
-//     groupId: 'io.apiman.plugins',
-//     artifactId: 'apiman-plugins-log-policy'
-//   }
+test('Should add one plugin.', t => {
+  const plug = {
+    type: 'war',
+    version: '1.2.6.Final',
+    groupId: 'io.apiman.plugins',
+    artifactId: 'apiman-plugins-log-policy'
+  };
 
-//   apiman.pluginAdd(plug)
-//     .then(x => {
-//       t.equal(x.artifactId, 'apiman-plugins-log-policy')
-//       t.end()
-//     }).catch(e => console.log(e))
-// })
+  apiman.pluginAdd(getOptions(), plug)
+    .then(x => {
+      t.equal(x.statusCode, 200);
+      t.end();
+    }).catch(e => console.log(e));
+});
 
-// test('The client should return plugins.', (t) => {
-//   apiman.plugins()
-//     .then(x => {
-//       let pluginFound = x.find(x => x.name === 'Transformation Policy Plugin')
-//       t.equal(pluginFound.name, 'Transformation Policy Plugin')
-//       t.end()
-//     }).catch(e => console.log(e))
-// })
+test('Should return plugins.', t => {
+  apiman.plugins(getOptions())
+    .then(x => {
+      const pluginFound = JSON.parse(x).find(x => x.name === 'Transformation Policy Plugin');
+      t.equal(pluginFound.name, 'Transformation Policy Plugin');
+      t.end();
+    }).catch(e => console.log(e));
+});
 
-// test('The client should return available plugins.', (t) => {
-//   apiman.availablePlugins()
-//     .then(x => {
-//       let availablePluginFound = x.find(x => x.artifactId === 'apiman-plugins-cors-policy')
-//       t.equal(availablePluginFound.artifactId, 'apiman-plugins-cors-policy')
-//       t.end()
-//     }).catch(e => console.log(e))
-// })
+test('Should return available plugins.', t => {
+  apiman.availablePlugins(getOptions())
+    .then(x => {
+      const availablePluginFound = JSON.parse(x).find(x => x.artifactId === 'apiman-plugins-cors-policy');
+      t.equal(availablePluginFound.artifactId, 'apiman-plugins-cors-policy');
+      t.end();
+    }).catch(e => console.log(e));
+});
 
-// test('The client should return roles.', (t) => {
-//   apiman.roles()
-//     .then(x => {
-//       let roleFound = x.find(x => x.id === 'APIDeveloper')
-//       t.equal(roleFound.id, 'APIDeveloper')
-//       t.end()
-//     }).catch(e => console.log(e))
-// })
+test('Should return roles.', t => {
+  apiman.roles(getOptions())
+    .then(x => {
+      const roleFound = JSON.parse(x).find(x => x.id === 'APIDeveloper');
+      t.equal(roleFound.id, 'APIDeveloper');
+      t.end();
+    }).catch(e => console.log(e));
+});
 
-// test('The client should return one role.', (t) => {
-//   apiman.role('ClientAppDeveloper')
-//     .then(x => {
-//       t.equal(x.id, 'ClientAppDeveloper')
-//       t.end()
-//     }).catch(e => console.log(e))
-// })
+test('Should return one role.', t => {
+  apiman.role(getOptions(), 'ClientAppDeveloper')
+    .then(x => {
+      t.equal(JSON.parse(x).id, 'ClientAppDeveloper');
+      t.end();
+    }).catch(e => console.log(e));
+});
 
-// test('The client should return one policy definition.', (t) => {
-//   apiman.policyDefinition('AuthorizationPolicy')
-//     .then(x => {
-//       t.equal(x.id, 'AuthorizationPolicy')
-//       t.end()
-//     }).catch(e => console.log(e))
-// })
+test('Should return one policy definition.', t => {
+  apiman.policyDefinition(getOptions(), 'AuthorizationPolicy')
+    .then(x => {
+      t.equal(JSON.parse(x).id, 'AuthorizationPolicy');
+      t.end();
+    }).catch(e => console.log(e));
+});
 
-// test('The client should return policy definitions.', (t) => {
-//   apiman.policyDefinitions()
-//     .then(x => {
-//       let policyFound = x.find((x) => x.id === 'AuthorizationPolicy')
-//       t.equal(policyFound.id, 'AuthorizationPolicy')
-//       t.end()
-//     }).catch(e => console.log(e))
-// })
+test('Should return policy definitions.', t => {
+  apiman.policyDefinitions(getOptions())
+    .then(x => {
+      const policyFound = JSON.parse(x).find((x) => x.id === 'AuthorizationPolicy');
+      t.equal(policyFound.id, 'AuthorizationPolicy');
+      t.end();
+    }).catch(e => console.log(e));
+});
 
-// test('The client should return current user API organizations.', (t) => {
-//   apiman.currentUserAPIOrganizations()
-//     .then(x => {
-//       let organizationFound = x.find(x => x.id === 'bucharest-gold')
-//       t.equal(organizationFound.id, 'bucharest-gold')
-//       t.end()
-//     }).catch(e => console.log(e))
-// })
+test('Should return current user API organizations.', t => {
+  apiman.currentUserAPIOrganizations(getOptions())
+    .then(x => {
+      const organizationFound = JSON.parse(x).find(x => x.id === 'bucharest-gold');
+      t.equal(organizationFound.id, 'bucharest-gold');
+      t.end();
+    }).catch(e => console.log(e));
+});
 
-// test('The client should return current user APIs.', (t) => {
-//   apiman.currentUserAPIs()
-//     .then(x => {
-//       let apiFound = x.find(x => x.id === 'testAPI')
-//       t.equal(apiFound.id, 'testAPI')
-//       t.end()
-//     }).catch(e => console.log(e))
-// })
+test('Should return current user APIs.', t => {
+  apiman.currentUserAPIs(getOptions())
+    .then(x => {
+      const apiFound = JSON.parse(x).find(x => x.id === 'testAPI');
+      t.equal(apiFound.id, 'testAPI');
+      t.end();
+    }).catch(e => console.log(e));
+});
 
 // test('The client should return current user client organizations.', (t) => {
 //   apiman.currentUserClientOrganizations()
@@ -346,9 +346,4 @@ test('Should return one plugin.', t => {
 //       t.end()
 //       console.log('Policy definition removed.')
 //     }).catch(e => console.log(e))
-// })
-
-// test('teardown', t => {
-//   console.log('done.')
-//   t.end()
 // })
