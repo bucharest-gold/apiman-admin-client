@@ -8,14 +8,14 @@ const options = {
   'password': 'admin123!'
 };
 
-apiman().status(options)
+apiman.status(options)
 .then(x => console.log(x))
 .catch(e => console.log(e));
 
-apiman().exportData(options)
+apiman.exportData(options)
 .then(x => console.log(x))
 .catch(e => console.log(e));
 
-apiman().gateways(options)
+apiman.gateways(options)
 .then(x => console.log(x))
 .catch(e => console.log(e));
