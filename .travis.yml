@@ -7,11 +7,11 @@ node_js:
   - "6"
 before_script:
    - npm install -g coveralls
-   - ./build/start-server.sh
+   - ./scripts/start-server.sh
 script:
    - make ci
 after_script:
-   - ./build/stop-server.sh
+   - ./scripts/stop-server.sh
 branches:
   only:
    - master

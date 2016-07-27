@@ -75,7 +75,7 @@ Bug fixes and features should come with tests. Add your tests in the
 To write the tests you will need docker installed and the server running, so run this script:
 
 ```shell
-$ ./build/start-server.sh
+$ ./scripts/start-server.sh
 ```
 This will pull and start the apiman docker image.
 
@@ -88,7 +88,7 @@ $ make
 You need to stop the server for each build to cleanup the apiman data by running this script:
 
 ```shell
-$ ./build/stop-server.sh
+$ ./scripts/stop-server.sh
 ```
 
 Make sure the jshint and semistandard are happy and that all tests pass. Please, do not submit
