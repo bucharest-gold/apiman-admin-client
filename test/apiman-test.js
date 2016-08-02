@@ -31,7 +31,7 @@ function getOptions () {
 test('setup', t => {
   apiman.importData(getOptions(), require('path').join(__dirname, '/fixtures/api-manager-export.json'))
     .then(x => {
-      t.equals(x.includes('Data import completed successfully!'), true);
+      t.equals(x.body.join('').includes('successfully'), true);
       t.end();
     }).catch(e => console.log(e));
 });
@@ -39,7 +39,7 @@ test('setup', t => {
 test('Should verify the status.', t => {
   apiman.status(getOptions())
     .then(x => {
-      t.equal(JSON.parse(x).name, 'API Manager REST API');
+      t.equal(JSON.parse(x.body).name, 'API Manager REST API');
       t.end();
     }).catch(e => console.log(e));
 });
@@ -47,7 +47,7 @@ test('Should verify the status.', t => {
 test('Should return configured gateways.', t => {
   apiman.gateways(getOptions())
     .then(x => {
-      x = JSON.parse(x);
+      x = JSON.parse(x.body);
       let gatewayFound = x.find(x => x.id === 'TheGateway');
       t.equal(gatewayFound.id, 'TheGateway');
       t.end();
@@ -57,7 +57,7 @@ test('Should return configured gateways.', t => {
 test('Should return one gateway.', t => {
   apiman.gateway(getOptions(), 'TheGateway')
     .then(x => {
-      t.equal(JSON.parse(x).id, 'TheGateway');
+      t.equal(JSON.parse(x.body).id, 'TheGateway');
       t.end();
     }).catch(e => console.log(e));
 });
@@ -86,7 +86,7 @@ test('Should add a gateway.', t => {
 test('Should export the data.', t => {
   apiman.exportData(getOptions())
     .then(x => {
-      t.equal(x.toString().includes('Final'), true);
+      t.equal(x.body.toString().includes('Final'), true);
       t.end();
     }).catch(e => console.log(e));
 });
@@ -94,7 +94,7 @@ test('Should export the data.', t => {
 test('Should return permissions.', t => {
   apiman.permissions(getOptions())
     .then(x => {
-      t.equal(JSON.parse(x).userId, 'admin');
+      t.equal(JSON.parse(x.body).userId, 'admin');
       t.end();
     }).catch(e => console.log(e));
 });
@@ -102,7 +102,7 @@ test('Should return permissions.', t => {
 test('Should return permissions of the user.', t => {
   apiman.permissionsUser(getOptions(), 'admin')
     .then(x => {
-      const permissionFound = JSON.parse(x).permissions.find(x => x.name === 'apiAdmin');
+      const permissionFound = JSON.parse(x.body).permissions.find(x => x.name === 'apiAdmin');
       t.equal(permissionFound.name, 'apiAdmin');
       t.end();
     }).catch(e => console.log(e));
@@ -111,7 +111,7 @@ test('Should return permissions of the user.', t => {
 test('Should return one plugin.', t => {
   apiman.plugin(getOptions(), 999)
     .then(x => {
-      t.equal(JSON.parse(x).id, 999);
+      t.equal(JSON.parse(x.body).id, 999);
       t.end();
     }).catch(e => console.log(e));
 });
@@ -134,7 +134,7 @@ test('Should add one plugin.', t => {
 test('Should return plugins.', t => {
   apiman.plugins(getOptions())
     .then(x => {
-      const pluginFound = JSON.parse(x).find(x => x.name === 'Transformation Policy Plugin');
+      const pluginFound = JSON.parse(x.body).find(x => x.name === 'Transformation Policy Plugin');
       t.equal(pluginFound.name, 'Transformation Policy Plugin');
       t.end();
     }).catch(e => console.log(e));
@@ -143,7 +143,7 @@ test('Should return plugins.', t => {
 test('Should return available plugins.', t => {
   apiman.availablePlugins(getOptions())
     .then(x => {
-      const availablePluginFound = JSON.parse(x).find(x => x.artifactId === 'apiman-plugins-cors-policy');
+      const availablePluginFound = JSON.parse(x.body).find(x => x.artifactId === 'apiman-plugins-cors-policy');
       t.equal(availablePluginFound.artifactId, 'apiman-plugins-cors-policy');
       t.end();
     }).catch(e => console.log(e));
@@ -152,7 +152,7 @@ test('Should return available plugins.', t => {
 test('Should return roles.', t => {
   apiman.roles(getOptions())
     .then(x => {
-      const roleFound = JSON.parse(x).find(x => x.id === 'APIDeveloper');
+      const roleFound = JSON.parse(x.body).find(x => x.id === 'APIDeveloper');
       t.equal(roleFound.id, 'APIDeveloper');
       t.end();
     }).catch(e => console.log(e));
@@ -161,7 +161,7 @@ test('Should return roles.', t => {
 test('Should return one role.', t => {
   apiman.role(getOptions(), 'ClientAppDeveloper')
     .then(x => {
-      t.equal(JSON.parse(x).id, 'ClientAppDeveloper');
+      t.equal(JSON.parse(x.body).id, 'ClientAppDeveloper');
       t.end();
     }).catch(e => console.log(e));
 });
@@ -169,7 +169,7 @@ test('Should return one role.', t => {
 test('Should return one policy definition.', t => {
   apiman.policyDefinition(getOptions(), 'AuthorizationPolicy')
     .then(x => {
-      t.equal(JSON.parse(x).id, 'AuthorizationPolicy');
+      t.equal(JSON.parse(x.body).id, 'AuthorizationPolicy');
       t.end();
     }).catch(e => console.log(e));
 });
@@ -177,7 +177,7 @@ test('Should return one policy definition.', t => {
 test('Should return policy definitions.', t => {
   apiman.policyDefinitions(getOptions())
     .then(x => {
-      const policyFound = JSON.parse(x).find((x) => x.id === 'AuthorizationPolicy');
+      const policyFound = JSON.parse(x.body).find((x) => x.id === 'AuthorizationPolicy');
       t.equal(policyFound.id, 'AuthorizationPolicy');
       t.end();
     }).catch(e => console.log(e));
@@ -186,7 +186,7 @@ test('Should return policy definitions.', t => {
 test('Should return current user API organizations.', t => {
   apiman.currentUserAPIOrganizations(getOptions())
     .then(x => {
-      const organizationFound = JSON.parse(x).find(x => x.id === 'bucharest-gold');
+      const organizationFound = JSON.parse(x.body).find(x => x.id === 'bucharest-gold');
       t.equal(organizationFound.id, 'bucharest-gold');
       t.end();
     }).catch(e => console.log(e));
@@ -195,7 +195,7 @@ test('Should return current user API organizations.', t => {
 test('Should return current user APIs.', t => {
   apiman.currentUserAPIs(getOptions())
     .then(x => {
-      const apiFound = JSON.parse(x).find(x => x.id === 'testAPI');
+      const apiFound = JSON.parse(x.body).find(x => x.id === 'testAPI');
       t.equal(apiFound.id, 'testAPI');
       t.end();
     }).catch(e => console.log(e));
@@ -204,7 +204,7 @@ test('Should return current user APIs.', t => {
 test('Should return current user client organizations.', t => {
   apiman.currentUserClientOrganizations(getOptions())
     .then(x => {
-      const organizationFound = JSON.parse(x).find(x => x.id === 'bucharest-gold');
+      const organizationFound = JSON.parse(x.body).find(x => x.id === 'bucharest-gold');
       t.equal(organizationFound.id, 'bucharest-gold');
       t.end();
     }).catch(e => console.log(e));
@@ -213,7 +213,7 @@ test('Should return current user client organizations.', t => {
 test('Should return current user clients.', t => {
   apiman.currentUserClients(getOptions())
     .then(x => {
-      const clientAppFound = JSON.parse(x).find(x => x.id === 'bucharest-gold-client-app');
+      const clientAppFound = JSON.parse(x.body).find(x => x.id === 'bucharest-gold-client-app');
       t.equal(clientAppFound.id, 'bucharest-gold-client-app');
       t.end();
     }).catch(e => console.log(e));
@@ -222,7 +222,7 @@ test('Should return current user clients.', t => {
 test('Should get informations about current user.', t => {
   apiman.currentUserInfo(getOptions())
     .then(x => {
-      t.equal(JSON.parse(x).username, 'admin');
+      t.equal(JSON.parse(x.body).username, 'admin');
       t.end();
     }).catch(e => console.log(e));
 });
@@ -238,32 +238,32 @@ test('Should update informations about current user.', t => {
 test('Should return current user organizations able to edit plans.', t => {
   apiman.currentUserPlanOrganizations(getOptions())
     .then(x => {
-      const organizationFound = JSON.parse(x).find(x => x.id === 'bucharest-gold');
+      const organizationFound = JSON.parse(x.body).find(x => x.id === 'bucharest-gold');
       t.equal(organizationFound.id, 'bucharest-gold');
       t.end();
     }).catch(e => console.log(e));
 });
 
-// test('Should return one organization.', t => {
-//   apiman.organization(getOptions(), 'bucharest-gold')
-//     .then(x => {
-//       t.equal(JSON.parse(x).id, 'bucharest-gold');
-//       t.end();
-//     }).catch(e => console.log(e));
-// });
+test('Should return one organization.', t => {
+  apiman.organization(getOptions(), 'bucharest-gold')
+    .then(x => {
+      t.equal(JSON.parse(x.body).id, 'bucharest-gold');
+      t.end();
+    }).catch(e => console.log(e));
+});
 
-// test('Should create one organization.', t => {
-//   apiman.organizationAdd(getOptions(), 'bucharest-gold2', 'the super org.')
-//     .then(x => {
-//       t.equal(JSON.parse(x).name, 'bucharest-gold2');
-//       t.end();
-//     }).catch(e => console.log(e));
-// });
+test('Should create one organization.', t => {
+  apiman.organizationAdd(getOptions(), 'bucharest-gold2', 'the super org.')
+    .then(x => {
+      t.equal(JSON.parse(x.body).name, 'bucharest-gold2');
+      t.end();
+    }).catch(e => console.log(e));
+});
 
 test('Should return one user.', t => {
   apiman.user(getOptions(), 'admin')
     .then(x => {
-      t.equal(JSON.parse(x).username, 'admin');
+      t.equal(JSON.parse(x.body).username, 'admin');
       t.end();
     }).catch(e => console.log(e));
 });
@@ -279,7 +279,7 @@ test('Should update informations about user.', t => {
 test('Should return user APIs.', t => {
   apiman.userAPIs(getOptions(), 'admin')
     .then(x => {
-      const apiFound = JSON.parse(x).find(x => x.id === 'testAPI');
+      const apiFound = JSON.parse(x.body).find(x => x.id === 'testAPI');
       t.equal(apiFound.id, 'testAPI');
       t.end();
     }).catch(e => console.log(e));
@@ -288,7 +288,7 @@ test('Should return user APIs.', t => {
 test('Should return user organizations.', t => {
   apiman.userOrganizations(getOptions(), 'admin')
     .then(x => {
-      const organizationFound = JSON.parse(x).find(x => x.id === 'bucharest-gold');
+      const organizationFound = JSON.parse(x.body).find(x => x.id === 'bucharest-gold');
       t.equal(organizationFound.id, 'bucharest-gold');
       t.end();
     }).catch(e => console.log(e));
@@ -297,7 +297,7 @@ test('Should return user organizations.', t => {
 test('Should return user clients.', t => {
   apiman.userClients(getOptions(), 'admin')
     .then(x => {
-      const clientAppFound = JSON.parse(x).find(x => x.id === 'bucharest-gold-client-app');
+      const clientAppFound = JSON.parse(x.body).find(x => x.id === 'bucharest-gold-client-app');
       t.equal(clientAppFound.id, 'bucharest-gold-client-app');
       t.end();
     }).catch(e => console.log(e));
@@ -320,13 +320,13 @@ test('Should remove one plugin.', t => {
     }).catch(e => console.log(e));
 });
 
-// test('Should remove one organization.', t => {
-//   apiman.organizationDelete(getOptions(), 'bucharest-gold')
-//     .then(x => {
-//       t.equal(x.statusCode, 204);
-//       t.end();
-//     }).catch(e => console.log(e));
-// });
+test('Should remove one organization.', t => {
+  apiman.organizationDelete(getOptions(), 'bucharest-gold')
+    .then(x => {
+      t.equal(x.statusCode, 204);
+      t.end();
+    }).catch(e => console.log(e));
+});
 
 test('Should remove one role.', t => {
   apiman.roleDelete(getOptions(), 'APIDeveloper')
