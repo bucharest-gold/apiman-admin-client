@@ -33,7 +33,10 @@ test('setup', t => {
     .then(x => {
       t.equals(x.body.join('').includes('successfully'), true);
       t.end();
-    }).catch(e => console.log(e));
+     }).catch(e => {
+      console.error(e.stack);
+      t.fail(e);
+    });
 });
 
 test('Should verify the status.', t => {
@@ -41,7 +44,10 @@ test('Should verify the status.', t => {
     .then(x => {
       t.equal(JSON.parse(x.body).name, 'API Manager REST API');
       t.end();
-    }).catch(e => console.log(e));
+     }).catch(e => {
+      console.error(e.stack);
+      t.fail(e);
+    });
 });
 
 test('Should return configured gateways.', t => {
@@ -51,7 +57,10 @@ test('Should return configured gateways.', t => {
       let gatewayFound = x.find(x => x.id === 'TheGateway');
       t.equal(gatewayFound.id, 'TheGateway');
       t.end();
-    }).catch(e => console.log(e));
+     }).catch(e => {
+      console.error(e.stack);
+      t.fail(e);
+    });
 });
 
 test('Should return one gateway.', t => {
@@ -59,7 +68,10 @@ test('Should return one gateway.', t => {
     .then(x => {
       t.equal(JSON.parse(x.body).id, 'TheGateway');
       t.end();
-    }).catch(e => console.log(e));
+     }).catch(e => {
+      console.error(e.stack);
+      t.fail(e);
+    });
 });
 
 test('Should add a gateway.', t => {
@@ -80,7 +92,10 @@ test('Should add a gateway.', t => {
     .then(x => {
       t.equals(x.statusCode, 200);
       t.end();
-    }).catch(e => console.log(e));
+     }).catch(e => {
+      console.error(e.stack);
+      t.fail(e);
+    });
 });
 
 test('Should export the data.', t => {
@@ -88,7 +103,10 @@ test('Should export the data.', t => {
     .then(x => {
       t.equal(x.body.toString().includes('Final'), true);
       t.end();
-    }).catch(e => console.log(e));
+     }).catch(e => {
+      console.error(e.stack);
+      t.fail(e);
+    });
 });
 
 test('Should return permissions.', t => {
@@ -96,7 +114,10 @@ test('Should return permissions.', t => {
     .then(x => {
       t.equal(JSON.parse(x.body).userId, 'admin');
       t.end();
-    }).catch(e => console.log(e));
+     }).catch(e => {
+      console.error(e.stack);
+      t.fail(e);
+    });
 });
 
 test('Should return permissions of the user.', t => {
@@ -105,7 +126,10 @@ test('Should return permissions of the user.', t => {
       const permissionFound = JSON.parse(x.body).permissions.find(x => x.name === 'apiAdmin');
       t.equal(permissionFound.name, 'apiAdmin');
       t.end();
-    }).catch(e => console.log(e));
+     }).catch(e => {
+      console.error(e.stack);
+      t.fail(e);
+    });
 });
 
 test('Should return one plugin.', t => {
@@ -113,7 +137,10 @@ test('Should return one plugin.', t => {
     .then(x => {
       t.equal(JSON.parse(x.body).id, 999);
       t.end();
-    }).catch(e => console.log(e));
+     }).catch(e => {
+      console.error(e.stack);
+      t.fail(e);
+    });
 });
 
 test('Should add one plugin.', t => {
@@ -128,7 +155,10 @@ test('Should add one plugin.', t => {
     .then(x => {
       t.equal(x.statusCode, 200);
       t.end();
-    }).catch(e => console.log(e));
+     }).catch(e => {
+      console.error(e.stack);
+      t.fail(e);
+    });
 });
 
 test('Should return plugins.', t => {
@@ -137,7 +167,10 @@ test('Should return plugins.', t => {
       const pluginFound = JSON.parse(x.body).find(x => x.name === 'Transformation Policy Plugin');
       t.equal(pluginFound.name, 'Transformation Policy Plugin');
       t.end();
-    }).catch(e => console.log(e));
+     }).catch(e => {
+      console.error(e.stack);
+      t.fail(e);
+    });
 });
 
 test('Should return available plugins.', t => {
@@ -146,7 +179,10 @@ test('Should return available plugins.', t => {
       const availablePluginFound = JSON.parse(x.body).find(x => x.artifactId === 'apiman-plugins-cors-policy');
       t.equal(availablePluginFound.artifactId, 'apiman-plugins-cors-policy');
       t.end();
-    }).catch(e => console.log(e));
+     }).catch(e => {
+      console.error(e.stack);
+      t.fail(e);
+    });
 });
 
 test('Should return roles.', t => {
@@ -155,7 +191,10 @@ test('Should return roles.', t => {
       const roleFound = JSON.parse(x.body).find(x => x.id === 'APIDeveloper');
       t.equal(roleFound.id, 'APIDeveloper');
       t.end();
-    }).catch(e => console.log(e));
+     }).catch(e => {
+      console.error(e.stack);
+      t.fail(e);
+    });
 });
 
 test('Should return one role.', t => {
@@ -163,7 +202,10 @@ test('Should return one role.', t => {
     .then(x => {
       t.equal(JSON.parse(x.body).id, 'ClientAppDeveloper');
       t.end();
-    }).catch(e => console.log(e));
+     }).catch(e => {
+      console.error(e.stack);
+      t.fail(e);
+    });
 });
 
 test('Should return one policy definition.', t => {
@@ -171,7 +213,10 @@ test('Should return one policy definition.', t => {
     .then(x => {
       t.equal(JSON.parse(x.body).id, 'AuthorizationPolicy');
       t.end();
-    }).catch(e => console.log(e));
+     }).catch(e => {
+      console.error(e.stack);
+      t.fail(e);
+    });
 });
 
 test('Should return policy definitions.', t => {
@@ -180,7 +225,10 @@ test('Should return policy definitions.', t => {
       const policyFound = JSON.parse(x.body).find((x) => x.id === 'AuthorizationPolicy');
       t.equal(policyFound.id, 'AuthorizationPolicy');
       t.end();
-    }).catch(e => console.log(e));
+     }).catch(e => {
+      console.error(e.stack);
+      t.fail(e);
+    });
 });
 
 test('Should return current user API organizations.', t => {
@@ -189,7 +237,10 @@ test('Should return current user API organizations.', t => {
       const organizationFound = JSON.parse(x.body).find(x => x.id === 'bucharest-gold');
       t.equal(organizationFound.id, 'bucharest-gold');
       t.end();
-    }).catch(e => console.log(e));
+     }).catch(e => {
+      console.error(e.stack);
+      t.fail(e);
+    });
 });
 
 test('Should return current user APIs.', t => {
@@ -198,7 +249,10 @@ test('Should return current user APIs.', t => {
       const apiFound = JSON.parse(x.body).find(x => x.id === 'testAPI');
       t.equal(apiFound.id, 'testAPI');
       t.end();
-    }).catch(e => console.log(e));
+     }).catch(e => {
+      console.error(e.stack);
+      t.fail(e);
+    });
 });
 
 test('Should return current user client organizations.', t => {
@@ -207,7 +261,10 @@ test('Should return current user client organizations.', t => {
       const organizationFound = JSON.parse(x.body).find(x => x.id === 'bucharest-gold');
       t.equal(organizationFound.id, 'bucharest-gold');
       t.end();
-    }).catch(e => console.log(e));
+     }).catch(e => {
+      console.error(e.stack);
+      t.fail(e);
+    });
 });
 
 test('Should return current user clients.', t => {
@@ -216,7 +273,10 @@ test('Should return current user clients.', t => {
       const clientAppFound = JSON.parse(x.body).find(x => x.id === 'bucharest-gold-client-app');
       t.equal(clientAppFound.id, 'bucharest-gold-client-app');
       t.end();
-    }).catch(e => console.log(e));
+     }).catch(e => {
+      console.error(e.stack);
+      t.fail(e);
+    });
 });
 
 test('Should get informations about current user.', t => {
@@ -224,7 +284,10 @@ test('Should get informations about current user.', t => {
     .then(x => {
       t.equal(JSON.parse(x.body).username, 'admin');
       t.end();
-    }).catch(e => console.log(e));
+     }).catch(e => {
+      console.error(e.stack);
+      t.fail(e);
+    });
 });
 
 test('Should update informations about current user.', t => {
@@ -232,7 +295,10 @@ test('Should update informations about current user.', t => {
     .then(x => {
       t.equal(x.statusCode, 204);
       t.end();
-    }).catch(e => console.log(e));
+     }).catch(e => {
+      console.error(e.stack);
+      t.fail(e);
+    });
 });
 
 test('Should return current user organizations able to edit plans.', t => {
@@ -241,7 +307,10 @@ test('Should return current user organizations able to edit plans.', t => {
       const organizationFound = JSON.parse(x.body).find(x => x.id === 'bucharest-gold');
       t.equal(organizationFound.id, 'bucharest-gold');
       t.end();
-    }).catch(e => console.log(e));
+     }).catch(e => {
+      console.error(e.stack);
+      t.fail(e);
+    });
 });
 
 test('Should return one organization.', t => {
@@ -249,7 +318,10 @@ test('Should return one organization.', t => {
     .then(x => {
       t.equal(JSON.parse(x.body).id, 'bucharest-gold');
       t.end();
-    }).catch(e => console.log(e));
+     }).catch(e => {
+      console.error(e.stack);
+      t.fail(e);
+    });
 });
 
 test('Should create one organization.', t => {
@@ -257,7 +329,10 @@ test('Should create one organization.', t => {
     .then(x => {
       t.equal(JSON.parse(x.body).name, 'bucharest-gold2');
       t.end();
-    }).catch(e => console.log(e));
+     }).catch(e => {
+      console.error(e.stack);
+      t.fail(e);
+    });
 });
 
 test('Should return one user.', t => {
@@ -265,7 +340,10 @@ test('Should return one user.', t => {
     .then(x => {
       t.equal(JSON.parse(x.body).username, 'admin');
       t.end();
-    }).catch(e => console.log(e));
+     }).catch(e => {
+      console.error(e.stack);
+      t.fail(e);
+    });
 });
 
 test('Should update informations about user.', t => {
@@ -273,7 +351,10 @@ test('Should update informations about user.', t => {
     .then(x => {
       t.equal(x.statusCode, 204);
       t.end();
-    }).catch(e => console.log(e));
+     }).catch(e => {
+      console.error(e.stack);
+      t.fail(e);
+    });
 });
 
 test('Should return user APIs.', t => {
@@ -282,7 +363,10 @@ test('Should return user APIs.', t => {
       const apiFound = JSON.parse(x.body).find(x => x.id === 'testAPI');
       t.equal(apiFound.id, 'testAPI');
       t.end();
-    }).catch(e => console.log(e));
+     }).catch(e => {
+      console.error(e.stack);
+      t.fail(e);
+    });
 });
 
 test('Should return user organizations.', t => {
@@ -291,7 +375,10 @@ test('Should return user organizations.', t => {
       const organizationFound = JSON.parse(x.body).find(x => x.id === 'bucharest-gold');
       t.equal(organizationFound.id, 'bucharest-gold');
       t.end();
-    }).catch(e => console.log(e));
+     }).catch(e => {
+      console.error(e.stack);
+      t.fail(e);
+    });
 });
 
 test('Should return user clients.', t => {
@@ -300,7 +387,10 @@ test('Should return user clients.', t => {
       const clientAppFound = JSON.parse(x.body).find(x => x.id === 'bucharest-gold-client-app');
       t.equal(clientAppFound.id, 'bucharest-gold-client-app');
       t.end();
-    }).catch(e => console.log(e));
+     }).catch(e => {
+      console.error(e.stack);
+      t.fail(e);
+    });
 });
 
 test('Should remove one gateway.', t => {
@@ -309,7 +399,10 @@ test('Should remove one gateway.', t => {
       t.equal(x.statusCode, 204);
       t.end();
       console.log('Gateway removed.');
-    }).catch(e => console.log(e));
+     }).catch(e => {
+      console.error(e.stack);
+      t.fail(e);
+    });
 });
 
 test('Should remove one plugin.', t => {
@@ -317,7 +410,10 @@ test('Should remove one plugin.', t => {
     .then(x => {
       t.equal(x.statusCode, 204);
       t.end();
-    }).catch(e => console.log(e));
+     }).catch(e => {
+      console.error(e.stack);
+      t.fail(e);
+    });
 });
 
 test('Should remove one organization.', t => {
@@ -325,7 +421,10 @@ test('Should remove one organization.', t => {
     .then(x => {
       t.equal(x.statusCode, 204);
       t.end();
-    }).catch(e => console.log(e));
+     }).catch(e => {
+      console.error(e.stack);
+      t.fail(e);
+    });
 });
 
 test('Should remove one role.', t => {
@@ -333,7 +432,10 @@ test('Should remove one role.', t => {
     .then(x => {
       t.equal(x.statusCode, 204);
       t.end();
-    }).catch(e => console.log(e));
+     }).catch(e => {
+      console.error(e.stack);
+      t.fail(e);
+    });
 });
 
 test('Should remove one policy definition.', t => {
@@ -341,5 +443,8 @@ test('Should remove one policy definition.', t => {
     .then(x => {
       t.equal(x.statusCode, 204);
       t.end();
-    }).catch(e => console.log(e));
+     }).catch(e => {
+      console.error(e.stack);
+      t.fail(e);
+    });
 });
