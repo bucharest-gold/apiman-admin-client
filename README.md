@@ -9,6 +9,16 @@ This package provides a Node.js client for the [Apiman REST services][1].
 
 > _Node.js 4, 5, 6_
 
+# NOTICE
+
+This project is no longer being actively maintained.
+
+For more information please read:
+
+[http://www.apiman.io/blog/apiman/3scale/2016/06/22/redhat-3scale-apiman.html](http://www.apiman.io/blog/apiman/3scale/2016/06/22/redhat-3scale-apiman.html)
+
+[http://www.apiman.io/blog/apiman/3scale/2016/08/19/3scale-apiman-part2.html](http://www.apiman.io/blog/apiman/3scale/2016/08/19/3scale-apiman-part2.html)
+
 ## Contributing
 
 Please read the [contributing guide](./CONTRIBUTING.md)
