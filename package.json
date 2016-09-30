@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "tape test/*-test.js",
-    "lint": "jshint index.js test/*.js",
+    "lint": "eslint index.js test/apiman-test.js",
     "format": "semistandard",
-    "coverage": "./node_modules/.bin/istanbul cover tape -- test/**.js",
+    "coverage": "istanbul cover tape test/apiman-test.js",
     "docs": "./node_modules/.bin/jsdoc -d docs -t ./node_modules/ink-docstrap/template -R README.md index.js"
   },
   "files": [
@@ -36,11 +36,15 @@
     "ink-docstrap": "^1.1.4",
     "istanbul": "^0.4.3",
     "jsdoc": "^3.4.0",
-    "jshint": "^2.9.2",
-    "semistandard": "^8.0.0",
-    "tape": "^4.5.1"
+    "tape": "^4.5.1",
+    "eslint": "^3.3.1",
+    "eslint-config-semistandard": "^7.0.0-beta.0",
+    "eslint-config-standard": "^6.0.0",
+    "eslint-plugin-promise": "^2.0.1",
+    "eslint-plugin-react": "^6.1.2",
+    "eslint-plugin-standard": "^2.0.0"
   },
   "dependencies": {
-    "roi": "^0.9.0"
+    "roi": "^0.12.1"
   }
 }

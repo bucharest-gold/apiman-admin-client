@@ -31,7 +31,7 @@ function getOptions () {
 test('setup', t => {
   apiman.importData(getOptions(), require('path').join(__dirname, '/fixtures/api-manager-export.json'))
     .then(x => {
-      t.equals(x.body.join('').includes('successfully'), true);
+      t.equals(x.body.includes('successfully'), true);
       t.end();
     }).catch(e => {
       console.error(e.stack);
