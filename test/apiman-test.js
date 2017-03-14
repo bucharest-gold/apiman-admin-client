@@ -54,7 +54,7 @@ test('Should return configured gateways.', t => {
   apiman.gateways(getOptions())
     .then(x => {
       x = JSON.parse(x.body);
-      let gatewayFound = x.find(x => x.id === 'TheGateway');
+      const gatewayFound = x.find(x => x.id === 'TheGateway');
       t.equal(gatewayFound.id, 'TheGateway');
       t.end();
     }).catch(e => {
@@ -75,13 +75,13 @@ test('Should return one gateway.', t => {
 });
 
 test('Should add a gateway.', t => {
-  let configuration = JSON.stringify({
+  const configuration = JSON.stringify({
     endpoint: 'http://localhost:8080/apiman-gateway-api-new',
     username: 'foo',
     password: 'bar'
   });
 
-  let gw = {
+  const gw = {
     name: 'The New Gateway3',
     description: 'This is the new gateway.',
     type: 'REST',

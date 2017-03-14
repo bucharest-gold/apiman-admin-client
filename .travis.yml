@@ -16,6 +16,7 @@ branches:
   only:
    - master
 after_success:
+   - rpm run coverage
    - cat ./coverage/lcov.info | coveralls
 notifications:
   irc: "irc.freenode.org#brass-monkey"
