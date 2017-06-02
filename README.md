@@ -7,7 +7,7 @@ Node.js client for the Apiman admin API.
 
 This package provides a Node.js client for the [Apiman REST services][1].
 
-> _Node.js 4, 5, 6_
+> _Node.js 4, 6, 8_
 
 # NOTICE
 
